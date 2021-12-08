@@ -193,12 +193,12 @@ class Day8(unittest.TestCase):
             "gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce"
         ]
 
+        self.data = [[x.split() for x in line.split(" | ")] for line in self.raw_data]
+
     def test_count_digits_made_of_unique_number_of_segments(self):
         expected = 26
-        data = [[x.split() for x in line.split(" | ")] for line in self.raw_data]
-        self.assertEqual(expected, solutions.count_digits_made_of_unique_number_of_segments(data))
+        self.assertEqual(expected, solutions.count_digits_made_of_unique_number_of_segments(self.data))
 
     def test_calculate_sum_of_all_output_digits(self):
         expected = 61229
-        data = [[x.split() for x in line.split(" | ")] for line in self.raw_data]
-        self.assertEqual(expected, solutions.calculate_sum_of_all_output_digits(data))
+        self.assertEqual(expected, solutions.calculate_sum_of_all_output_digits(self.data))
