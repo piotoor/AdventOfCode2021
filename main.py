@@ -13,6 +13,8 @@ if __name__ == '__main__':
     solutions.day5_b()
     solutions.day6_a()
     solutions.day6_b()
-
     solutions.day7_a()
     solutions.day7_b()
+
+    solutions.day8_a()
+    solutions.day8_b()
