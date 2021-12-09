@@ -202,3 +202,45 @@ class Day8(unittest.TestCase):
     def test_calculate_sum_of_all_output_digits(self):
         expected = 61229
         self.assertEqual(expected, solutions.calculate_sum_of_all_output_digits(self.data))
+
+
+class Day9(unittest.TestCase):
+    @parameterized.expand([
+        ("aoc example",  [
+            [2, 1, 9, 9, 9, 4, 3, 2, 1, 0],
+            [3, 9, 8, 7, 8, 9, 4, 9, 2, 1],
+            [9, 8, 5, 6, 7, 8, 9, 8, 9, 2],
+            [8, 7, 6, 7, 8, 9, 6, 7, 8, 9],
+            [9, 8, 9, 9, 9, 6, 5, 6, 7, 8]
+        ], 15),
+        ("own example 1", [
+            [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+            [0, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+        ], 4),
+        ("own example 2", [
+            [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+            [1, 1, 1, 3, 3, 3, 1, 1, 1, 1],
+            [1, 1, 1, 3, 1, 3, 1, 1, 1, 1],
+            [1, 1, 1, 3, 3, 3, 1, 1, 1, 1],
+            [0, 1, 1, 1, 1, 1, 1, 1, 1, 0]
+        ], 6),
+
+    ])
+    def test_calculate_sum_of_the_risk_levels(self, name, data, expected):
+        self.assertEqual(expected, solutions.calculate_sum_of_the_risk_levels(data))
+
+    @parameterized.expand([
+        ("aoc example",  [
+            [2, 1, 9, 9, 9, 4, 3, 2, 1, 0],
+            [3, 9, 8, 7, 8, 9, 4, 9, 2, 1],
+            [9, 8, 5, 6, 7, 8, 9, 8, 9, 2],
+            [8, 7, 6, 7, 8, 9, 6, 7, 8, 9],
+            [9, 8, 9, 9, 9, 6, 5, 6, 7, 8]
+        ], 1134),
+    ])
+    def test_calculate_sum_of_three_largest_basins(self, name, data, expected):
+        basin_handler = solutions.BasinHandler(data)
+        self.assertEqual(expected, basin_handler.calculate_sum_of_three_largest_basins())
