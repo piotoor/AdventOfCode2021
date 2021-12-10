@@ -244,3 +244,114 @@ class Day9(unittest.TestCase):
     def test_calculate_sum_of_three_largest_basins(self, name, data, expected):
         basin_handler = solutions.BasinHandler(data)
         self.assertEqual(expected, basin_handler.calculate_sum_of_three_largest_basins())
+
+
+class Day10(unittest.TestCase):
+    @parameterized.expand([
+        ("aoc example 1", "[({(<(())[]>[[{[]{<()<>>", None),
+        ("aoc example 2", "[(()[<>])]({[<{<<[]>>(", None),
+        ("aoc example 3", "{([(<{}[<>[]}>{[]{[(<()>", '}'),
+        ("aoc example 4", "(((({<>}<{<{<>}{[]{[]{}", None),
+        ("aoc example 5", "[[<[([]))<([[{}[[()]]]", ')'),
+        ("aoc example 6", "[{[{({}]{}}([{[{{{}}([]", ']'),
+        ("aoc example 7", "{<[[]]>}<{[{[{[]{()[[[]", None),
+        ("aoc example 8", "[<(<(<(<{}))><([]([]()", ')'),
+        ("aoc example 9", "<{([([[(<>()){}]>(<<{{", '>'),
+        ("aoc example 10", "<{([{{}}[<[[[<>{}]]]>[]]", None),
+        ("own example 1", "<<<<>>>", None),
+        ("own example 2", "<<<<>>>)", ')')
+    ])
+    def test_find_first_corrupted_bracket_in_expr(self, name, expression, expected):
+        self.assertEqual(expected, solutions.ParenthesisParser.find_first_corrupted_bracket_in_expr(expression))
+
+    @parameterized.expand([
+        ("own example 1", [
+         "<<<<>>>)"
+        ], 3),
+        ("own example 2", [
+            "<<<<>>>]"
+        ], 57),
+        ("own example 3", [
+            "<<<<>>>}"
+        ], 1197),
+        ("own example 4", [
+            "(>"
+        ], 25137),
+        ("own example 5", [
+            "<<<<>>>)",
+            "<<<<>>>)",
+            "<<<<>>>]",
+            "<<<<>>>]",
+            "<<<<>>>}",
+            "<<<<>>>}",
+            "(>",
+            "(>"
+        ], 52788),
+        ("aoc example", [
+            "[({(<(())[]>[[{[]{<()<>>",
+            "[(()[<>])]({[<{<<[]>>(",
+            "{([(<{}[<>[]}>{[]{[(<()>",
+            "(((({<>}<{<{<>}{[]{[]{}",
+            "[[<[([]))<([[{}[[()]]]",
+            "[{[{({}]{}}([{[{{{}}([]",
+            "{<[[]]>}<{[{[{[]{()[[[]",
+            "[<(<(<(<{}))><([]([]()",
+            "<{([([[(<>()){}]>(<<{{"
+            "<{([{{}}[<[[[<>{}]]]>[]]"
+        ], 26397),
+    ])
+    def test_calculate_syntax_error_score(self, name, data, expected):
+        parser = solutions.ParenthesisParser(data)
+        self.assertEqual(expected, parser.calculate_syntax_error_score())
+
+    @parameterized.expand([
+        ("aoc example 1", "[({(<(())[]>[[{[]{<()<>>", "}}]])})]"),
+        ("aoc example 2", "[(()[<>])]({[<{<<[]>>(", ")}>]})"),
+        ("aoc example 3", "{([(<{}[<>[]}>{[]{[(<()>", None),
+        ("aoc example 4", "(((({<>}<{<{<>}{[]{[]{}", "}}>}>))))"),
+        ("aoc example 5", "[[<[([]))<([[{}[[()]]]", None),
+        ("aoc example 6", "[{[{({}]{}}([{[{{{}}([]", None),
+        ("aoc example 7", "{<[[]]>}<{[{[{[]{()[[[]", "]]}}]}]}>"),
+        ("aoc example 8", "[<(<(<(<{}))><([]([]()", None),
+        ("aoc example 9", "<{([([[(<>()){}]>(<<{{", None),
+        ("aoc example 10", "<{([{{}}[<[[[<>{}]]]>[]]", "])}>"),
+    ])
+    def test_find_missing_brackets_in_expr(self, name, expression, expected):
+        self.assertEqual(expected, solutions.ParenthesisParser.find_missing_brackets_in_expr(expression))
+
+    @parameterized.expand([
+        ("own example 1", [
+            "("
+        ], 1),
+        ("own example 2", [
+            "["
+        ], 2),
+        ("own example 3", [
+            "{"
+        ], 3),
+        ("own example 4", [
+            "<"
+        ], 4),
+        ("own example 5", [
+            "((",  # 6
+            "[[",  # 12
+            "{{",  # 18
+            "<<",  # 24
+            "(<"   # 21
+        ], 18),
+        ("aoc example", [
+            "[({(<(())[]>[[{[]{<()<>>",
+            "[(()[<>])]({[<{<<[]>>(",
+            "{([(<{}[<>[]}>{[]{[(<()>",
+            "(((({<>}<{<{<>}{[]{[]{}",
+            "[[<[([]))<([[{}[[()]]]",
+            "[{[{({}]{}}([{[{{{}}([]",
+            "{<[[]]>}<{[{[{[]{()[[[]",
+            "[<(<(<(<{}))><([]([]()",
+            "<{([([[(<>()){}]>(<<{{",
+            "<{([{{}}[<[[[<>{}]]]>[]]"
+        ], 288957),
+    ])
+    def test_calculate_autocomplete_score(self, name, data, expected):
+        parser = solutions.ParenthesisParser(data)
+        self.assertEqual(expected, parser.calculate_autocomplete_score())
