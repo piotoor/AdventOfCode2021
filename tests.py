@@ -174,7 +174,7 @@ class Day7(unittest.TestCase):
         ("const fuel usage", [16, 1, 2, 0, 4, 2, 7, 1, 2, 14], 37, lambda x: x),
         ("increasing fuel usage", [16, 1, 2, 0, 4, 2, 7, 1, 2, 14], 168, lambda x: int(0.5 * x * (x + 1))),
     ])
-    def test_find_optimal_fuel_usage(self, name, data, expected, increase):
+    def test_find_optimal_fuel_usage(self, _, data, expected, increase):
         self.assertEqual(expected, solutions.find_optimal_fuel_usage(data, increase))
 
 
@@ -229,7 +229,7 @@ class Day9(unittest.TestCase):
         ], 6),
 
     ])
-    def test_calculate_sum_of_the_risk_levels(self, name, data, expected):
+    def test_calculate_sum_of_the_risk_levels(self, _, data, expected):
         self.assertEqual(expected, solutions.calculate_sum_of_the_risk_levels(data))
 
     @parameterized.expand([
@@ -241,7 +241,7 @@ class Day9(unittest.TestCase):
             [9, 8, 9, 9, 9, 6, 5, 6, 7, 8]
         ], 1134),
     ])
-    def test_calculate_sum_of_three_largest_basins(self, name, data, expected):
+    def test_calculate_sum_of_three_largest_basins(self, _, data, expected):
         basin_handler = solutions.BasinHandler(data)
         self.assertEqual(expected, basin_handler.calculate_sum_of_three_largest_basins())
 
@@ -261,12 +261,12 @@ class Day10(unittest.TestCase):
         ("own example 1", "<<<<>>>", None),
         ("own example 2", "<<<<>>>)", ')')
     ])
-    def test_find_first_corrupted_bracket_in_expr(self, name, expression, expected):
+    def test_find_first_corrupted_bracket_in_expr(self, _, expression, expected):
         self.assertEqual(expected, solutions.ParenthesisParser.find_first_corrupted_bracket_in_expr(expression))
 
     @parameterized.expand([
         ("own example 1", [
-         "<<<<>>>)"
+            "<<<<>>>)"
         ], 3),
         ("own example 2", [
             "<<<<>>>]"
@@ -300,7 +300,7 @@ class Day10(unittest.TestCase):
             "<{([{{}}[<[[[<>{}]]]>[]]"
         ], 26397),
     ])
-    def test_calculate_syntax_error_score(self, name, data, expected):
+    def test_calculate_syntax_error_score(self, _, data, expected):
         parser = solutions.ParenthesisParser(data)
         self.assertEqual(expected, parser.calculate_syntax_error_score())
 
@@ -316,7 +316,7 @@ class Day10(unittest.TestCase):
         ("aoc example 9", "<{([([[(<>()){}]>(<<{{", None),
         ("aoc example 10", "<{([{{}}[<[[[<>{}]]]>[]]", "])}>"),
     ])
-    def test_find_missing_brackets_in_expr(self, name, expression, expected):
+    def test_find_missing_brackets_in_expr(self, _, expression, expected):
         self.assertEqual(expected, solutions.ParenthesisParser.find_missing_brackets_in_expr(expression))
 
     @parameterized.expand([
@@ -352,6 +352,6 @@ class Day10(unittest.TestCase):
             "<{([{{}}[<[[[<>{}]]]>[]]"
         ], 288957),
     ])
-    def test_calculate_autocomplete_score(self, name, data, expected):
+    def test_calculate_autocomplete_score(self, _, data, expected):
         parser = solutions.ParenthesisParser(data)
         self.assertEqual(expected, parser.calculate_autocomplete_score())

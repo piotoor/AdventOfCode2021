@@ -661,16 +661,14 @@ class ParenthesisParser:
     @classmethod
     def find_first_corrupted_bracket_in_expr(cls, expr):
         stack = []
-        ans = []
 
         for x in expr:
             if x in ParenthesisParser.opening_brackets:
                 stack.append(x)
+            elif ParenthesisParser.brackets_pairs[stack[-1]] == x:
+                stack.pop()
             else:
-                if ParenthesisParser.brackets_pairs[stack[-1]] == x:
-                    stack.pop()
-                else:
-                    return x
+                return x
 
         return None
 
@@ -683,6 +681,7 @@ class ParenthesisParser:
     def calculate_syntax_error_score(self):
         self.find_invalid_brackets()
         ans = 0
+
         for x in self.invalid_brackets:
             ans += ParenthesisParser.syntax_error_points[x]
 
@@ -691,21 +690,16 @@ class ParenthesisParser:
     @classmethod
     def find_missing_brackets_in_expr(cls, expr):
         stack = []
-        ans = []
 
         for x in expr:
             if x in ParenthesisParser.opening_brackets:
                 stack.append(x)
+            elif ParenthesisParser.brackets_pairs[stack[-1]] == x:
+                stack.pop()
             else:
-                if ParenthesisParser.brackets_pairs[stack[-1]] == x:
-                    stack.pop()
-                else:
-                    return None
+                return None
 
-        for x in reversed(stack):
-            ans.append(ParenthesisParser.brackets_pairs[x])
-
-        return "".join(ans)
+        return "".join(reversed(list(map(lambda y: ParenthesisParser.brackets_pairs[y], stack))))
 
     def find_missing_brackets(self):
         for row in self.data:
