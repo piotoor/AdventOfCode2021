@@ -358,7 +358,6 @@ class Day10(unittest.TestCase):
 
 
 class Day11(unittest.TestCase):
-
     @parameterized.expand([
         ("aoc example 1", [
             [5, 4, 8, 3, 1, 4, 3, 2, 2, 3],
@@ -401,3 +400,100 @@ class Day11(unittest.TestCase):
     def test_count_number_of_flashes(self, _, data, expected):
         handler = solutions.OctopusEngeryHandler(data)
         self.assertEqual(expected, handler.count_steps_to_simultaneous_flash())
+
+
+class Day12(unittest.TestCase):
+
+    @parameterized.expand([
+        ("aoc example 1", [
+            ("start", "A"),
+            ("start", "b"),
+            ("A", "c"),
+            ("A", "b"),
+            ("b", "d"),
+            ("A", "end"),
+            ("b", "end")
+        ], 10),
+        ("aoc example 2", [
+            ("dc", "end"),
+            ("HN", "start"),
+            ("start", "kj"),
+            ("dc", "start"),
+            ("dc", "HN"),
+            ("LN", "dc"),
+            ("HN", "end"),
+            ("kj", "sa"),
+            ("kj", "HN"),
+            ("kj", "dc"),
+        ], 19),
+        ("aoc example 3", [
+            ("fs", "end"),
+            ("he", "DX"),
+            ("fs", "he"),
+            ("start", "DX"),
+            ("pj", "DX"),
+            ("end", "zg"),
+            ("zg", "sl"),
+            ("zg", "pj"),
+            ("pj", "he"),
+            ("RW", "he"),
+            ("fs", "DX"),
+            ("pj", "RW"),
+            ("zg", "RW"),
+            ("start", "pj"),
+            ("he", "WI"),
+            ("zg", "he"),
+            ("pj", "fs"),
+            ("start", "RW"),
+        ], 226)
+    ])
+    def test_count_paths_visiting_all_small_caves_once(self, _, data, expected):
+        pf = solutions.Pathfinder(data)
+        self.assertEqual(expected, pf.count_paths_visiting_all_small_caves_once())
+
+    @parameterized.expand([
+        ("aoc example 1", [
+            ("start", "A"),
+            ("start", "b"),
+            ("A", "c"),
+            ("A", "b"),
+            ("b", "d"),
+            ("A", "end"),
+            ("b", "end")
+        ], 36),
+        ("aoc example 2", [
+            ("dc", "end"),
+            ("HN", "start"),
+            ("start", "kj"),
+            ("dc", "start"),
+            ("dc", "HN"),
+            ("LN", "dc"),
+            ("HN", "end"),
+            ("kj", "sa"),
+            ("kj", "HN"),
+            ("kj", "dc"),
+        ], 103),
+        ("aoc example 3", [
+            ("fs", "end"),
+            ("he", "DX"),
+            ("fs", "he"),
+            ("start", "DX"),
+            ("pj", "DX"),
+            ("end", "zg"),
+            ("zg", "sl"),
+            ("zg", "pj"),
+            ("pj", "he"),
+            ("RW", "he"),
+            ("fs", "DX"),
+            ("pj", "RW"),
+            ("zg", "RW"),
+            ("start", "pj"),
+            ("he", "WI"),
+            ("zg", "he"),
+            ("pj", "fs"),
+            ("start", "RW"),
+        ], 3509)
+    ])
+    def test_count_paths_visiting_all_small_caves_but_one_once(self, _, data, expected):
+        pf = solutions.Pathfinder(data)
+        self.assertEqual(expected, pf.count_paths_visiting_all_small_caves_but_one_once())

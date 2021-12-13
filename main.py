@@ -21,6 +21,7 @@ if __name__ == '__main__':
     # solutions.day9_b()
     # solutions.day10_a()
     # solutions.day10_b()
-
-    solutions.day11_a()
-    solutions.day11_b()
+    # solutions.day11_a()
+    # solutions.day11_b()
+    solutions.day12_a()
+    solutions.day12_b()
