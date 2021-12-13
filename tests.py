@@ -403,7 +403,6 @@ class Day11(unittest.TestCase):
 
 
 class Day12(unittest.TestCase):
-
     @parameterized.expand([
         ("aoc example 1", [
             ("start", "A"),
@@ -497,3 +496,41 @@ class Day12(unittest.TestCase):
     def test_count_paths_visiting_all_small_caves_but_one_once(self, _, data, expected):
         pf = solutions.Pathfinder(data)
         self.assertEqual(expected, pf.count_paths_visiting_all_small_caves_but_one_once())
+
+
+class Day13(unittest.TestCase):
+    def setUp(self):
+        self.dots = {
+            (6, 10),
+            (0, 14),
+            (9, 10),
+            (0, 3),
+            (10, 4),
+            (4, 11),
+            (6, 0),
+            (6, 12),
+            (4, 1),
+            (0, 13),
+            (10, 12),
+            (3, 4),
+            (3, 0),
+            (8, 4),
+            (1, 10),
+            (2, 14),
+            (8, 10),
+            (9, 0),
+        }
+        self.instructions = [
+            ('y', 7),
+            ('x', 5)
+        ]
+
+    def test_count_dots_after_single_fold(self):
+        folder = solutions.OrigamiFolder((self.dots, self.instructions))
+        expected = 17
+        self.assertEqual(folder.count_dots_after_single_fold(), expected)
+
+    def test_count_dots_after_full_fold(self):
+        folder = solutions.OrigamiFolder((self.dots, self.instructions))
+        expected = 16
+        self.assertEqual(folder.count_dots_after_full_fold(), expected)
