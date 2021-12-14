@@ -534,3 +534,49 @@ class Day13(unittest.TestCase):
         folder = solutions.OrigamiFolder((self.dots, self.instructions))
         expected = 16
         self.assertEqual(folder.count_dots_after_full_fold(), expected)
+
+
+class Day14(unittest.TestCase):
+    @parameterized.expand([
+        ("aoc example 1", [
+            "NNCB",
+            ("CH", "B"),
+            ("HH", "N"),
+            ("CB", "H"),
+            ("NH", "C"),
+            ("HB", "C"),
+            ("HC", "B"),
+            ("HN", "C"),
+            ("NN", "C"),
+            ("BH", "H"),
+            ("NC", "B"),
+            ("NB", "B"),
+            ("BN", "B"),
+            ("BB", "N"),
+            ("BC", "B"),
+            ("CC", "N"),
+            ("CN", "C")
+        ], 10, 1588),
+        ("aoc example 2", [
+            "NNCB",
+            ("CH", "B"),
+            ("HH", "N"),
+            ("CB", "H"),
+            ("NH", "C"),
+            ("HB", "C"),
+            ("HC", "B"),
+            ("HN", "C"),
+            ("NN", "C"),
+            ("BH", "H"),
+            ("NC", "B"),
+            ("NB", "B"),
+            ("BN", "B"),
+            ("BB", "N"),
+            ("BC", "B"),
+            ("CC", "N"),
+            ("CN", "C")
+        ], 40, 2188189693529)
+    ])
+    def test_most_common_least_common_diff(self, _, data, steps, expected):
+        handler = solutions.PolymerHandler(data)
+        self.assertEqual(expected, handler.most_common_least_common_diff(steps))
