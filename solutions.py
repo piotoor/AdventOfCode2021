@@ -1069,44 +1069,7 @@ def day14_b():
 class WeightedPathfinder:
     def __init__(self, data):
         self.data = data
-
-    def dijkstra(self, source, target):
-        q = {}
-        dist = {}
-        prev = {}
-
-        for i in range(len(self.data)):
-            for j in range(len(self.data[0])):
-                dist[(i, j)] = sys.maxsize
-                prev[(i, j)] = None
-                q[(i, j)] = sys.maxsize
-
-        dist[source] = 0
-
-        while len(q) > 0:
-            u = min(q, key=q.get)
-            del q[u]
-
-            if u == target:
-                return dist, prev
-
-            r, c = u
-            for i in range(r - 1, r + 2):
-                for j in range(c - 1, c + 2):
-                    if i < 0 or i >= len(self.data) or j < 0 or j >= len(self.data[0]) or (i == r and j == c) or (i != r and j != c):
-                        continue
-                    v = (i, j)
-
-                    if v not in q:
-                        continue
-
-                    alt = dist[u] + self.data[i][j]
-                    if alt < dist[v]:
-                        dist[v] = alt
-                        q[v] = alt
-                        prev[v] = u
-
-        return dist, prev
+        self.data_5x5 = []
 
     @classmethod
     def print_path(cls, data, path):
@@ -1123,10 +1086,55 @@ class WeightedPathfinder:
 
         print(data_str)
 
+    @classmethod
+    def dijkstra(cls, data, source, target):
+        q = {}
+        dist = {}
+        prev = {}
+
+        for i in range(len(data)):
+            for j in range(len(data[0])):
+                dist[(i, j)] = sys.maxsize
+                prev[(i, j)] = None
+                q[(i, j)] = sys.maxsize
+
+        dist[source] = 0
+
+        while len(q) > 0:
+            curr = min(q, key=q.get)
+            del q[curr]
+
+            if curr == target:
+                return dist, prev
+
+            r, c = curr
+            for i in range(r - 1, r + 2):
+                for j in range(c - 1, c + 2):
+                    if i < 0 or i >= len(data) or j < 0 or j >= len(data[0]) or (i == r and j == c) or (i != r and j != c):
+                        continue
+
+                    neighbour = (i, j)
+                    if neighbour not in q:
+                        continue
+
+                    alt = dist[curr] + data[i][j]
+                    if alt < dist[neighbour]:
+                        dist[neighbour] = alt
+                        q[neighbour] = alt
+                        prev[neighbour] = curr
+
+        return dist, prev
+
     def find_path_of_the_lowest_risk(self):
         source = (0, 0)
         target = (len(self.data) - 1, len(self.data[0]) - 1)
-        dist, prev = self.dijkstra(source, target)
+        dist, prev = WeightedPathfinder.dijkstra(self.data, source, target)
+        return dist[target]
+
+    def find_path_of_the_lowest_risk_part2(self):
+        source = (0, 0)
+        target = (len(self.data) - 1, len(self.data[0]) - 1)
+        dist, prev = WeightedPathfinder.dijkstra(self.data_5x5, source, target)
         return dist[target]
 
 
