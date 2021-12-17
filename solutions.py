@@ -1064,3 +1064,80 @@ def day14_b():
     data = parse_day14_data()
     poly_handler = PolymerHandler(data)
     print("day14_b = {}".format(poly_handler.most_common_least_common_diff(40)))
+
+
+class WeightedPathfinder:
+    def __init__(self, data):
+        self.data = data
+
+    def dijkstra(self, source, target):
+        q = {}
+        dist = {}
+        prev = {}
+
+        for i in range(len(self.data)):
+            for j in range(len(self.data[0])):
+                dist[(i, j)] = sys.maxsize
+                prev[(i, j)] = None
+                q[(i, j)] = sys.maxsize
+
+        dist[source] = 0
+
+        while len(q) > 0:
+            u = min(q, key=q.get)
+            del q[u]
+
+            if u == target:
+                return dist, prev
+
+            r, c = u
+            for i in range(r - 1, r + 2):
+                for j in range(c - 1, c + 2):
+                    if i < 0 or i >= len(self.data) or j < 0 or j >= len(self.data[0]) or (i == r and j == c) or (i != r and j != c):
+                        continue
+                    v = (i, j)
+
+                    if v not in q:
+                        continue
+
+                    alt = dist[u] + self.data[i][j]
+                    if alt < dist[v]:
+                        dist[v] = alt
+                        q[v] = alt
+                        prev[v] = u
+
+        return dist, prev
+
+    @classmethod
+    def print_path(cls, data, path):
+        data_str = ""
+        data_ = data.copy()
+
+        for i in range(len(data_)):
+            for j in range(len(data_[0])):
+                if (i, j) in path:
+                    data_[i][j] = 'X'
+                else:
+                    data_[i][j] = '_'
+            data_str += "".join(data_[i]) + '\n'
+
+        print(data_str)
+
+    def find_path_of_the_lowest_risk(self):
+        source = (0, 0)
+        target = (len(self.data) - 1, len(self.data[0]) - 1)
+        dist, prev = self.dijkstra(source, target)
+        return dist[target]
+
+
+def parse_day15_data():
+    with open("day15_a.txt", "r") as f:
+        data = [list(map(int, list(line))) for line in non_blank_lines(f)]
+
+    return data
+
+
+def day15_a():
+    data = parse_day15_data()
+    pathfinder = WeightedPathfinder(data)
+    print("day14_a = {}".format(pathfinder.find_path_of_the_lowest_risk()))
