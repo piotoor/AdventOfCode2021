@@ -31,4 +31,6 @@ if __name__ == '__main__':
     # solutions.day14_b()
 
     # solutions.day15_a()
-    solutions.day15_b()
+    # solutions.day15_b()
+    solutions.day16_a()
+

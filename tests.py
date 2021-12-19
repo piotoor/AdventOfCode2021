@@ -692,3 +692,18 @@ class Day15(unittest.TestCase):
     def test_find_path_of_the_lowest_risk_extended(self, _, data, expected):
         pathfinder = solutions.WeightedPathfinder(data)
         self.assertEqual(expected, pathfinder.find_path_of_the_lowest_risk_extended())
+
+
+class Day16(unittest.TestCase):
+    @parameterized.expand([
+        ("aoc example 1", "D2FE28", 6),
+        ("aoc example 2", "38006F45291200", 9),
+        ("aoc example 3", "EE00D40C823060", 14),
+        ("aoc example 4", "8A004A801A8002F478", 16),
+        ("aoc example 5", "620080001611562C8802118E34", 12),
+        ("aoc example 6", "C0015000016115A2E0802F182340", 23),
+        ("aoc example 7", "A0016C880162017C3686B18A3D4780", 31),
+    ])
+    def test_calculate_sum_of_packet_versions(self, _, data, expected):
+        handler = solutions.TransmissionHandler(data)
+        self.assertEqual(expected, handler.calculate_sum_of_packet_versions())
