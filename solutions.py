@@ -7,6 +7,7 @@ from collections import Counter
 import time
 import heapq
 from enum import Enum
+import math
 
 sys.setrecursionlimit(15000)
 
@@ -1184,51 +1185,21 @@ def day15_b():
     print("duration = {}".format(time.time() - start))
 
 
-class PacketType(Enum):
-    LITERAL = 0,
-    OPERATOR = 1
-
-
-class Packet:
-    def __init__(self):
-        self.header = ""
-        self.version = ""
-        self.packet_type = 0
-        self.next_packet = None
-        self.children_list = None
-
-
 class TransmissionHandler:
     def __init__(self, data):
         self.data_hex = data
-        self.data_bin = ""
+        self.data_bin = "".join([format(int(digit, 16), '04b') for digit in self.data_hex])
         self.ind = 0
-
-        for digit in self.data_hex:
-            bin_digit = format(int(digit, 16), '04b')
-            self.data_bin += bin_digit
-        print(self.data_bin)
-        self.packets = None
-
         self.sum_of_version_numbers = 0
 
     def parse_packet(self, data):
-        print(data[self.ind:])
-        if len(data) - self.ind < 11:  # no room left for a packet. Discardable zeros.
-            return False
-
-        ver_str = data[self.ind:self.ind+3]
+        ver_int = int(data[self.ind:self.ind+3], 2)
         self.ind += 3
-        type_str = data[self.ind:self.ind+3]
+        type_int = int(data[self.ind:self.ind+3], 2)
         self.ind += 3
-        ver_int = int(ver_str, 2)
-        type_int = int(type_str, 2)
         self.sum_of_version_numbers += ver_int
 
-        print("ver = {} {}\ntype = {} {}".format(ver_str, ver_int, type_str, type_int))
-
         if type_int == 4:
-            pass  # literal
             literal = ""
             while True:
                 more = data[self.ind:self.ind+1]
@@ -1237,12 +1208,11 @@ class TransmissionHandler:
                 self.ind += 4
                 if more == '0':
                     break
-            print("literal = {}".format(literal))
+            return int(literal, 2)
         else:
             length_type_id_str = data[self.ind:self.ind+1]
             self.ind += 1
 
-            length_field_size = 0
             if length_type_id_str == '0':
                 length_field_size = 15
             else:
@@ -1252,33 +1222,48 @@ class TransmissionHandler:
             self.ind += length_field_size
             length_int = int(length_str, 2)
 
-            # child_tmp_data = data[self.ind:self.ind + length_int]  # recursively children
-            #
-            # print("child_data = {} self.ind = {}".format(child_tmp_data, self.ind))
-            # next_tmp_data = data[self.ind:self.ind + length_int]   # recursively next
+            operands_start_ind = self.ind
+            operands = []
+            if length_field_size == 15:
+                while self.ind < operands_start_ind + length_int:
+                    operands.append(self.parse_packet(data))
+            else:
+                for i in range(length_int):
+                    operands.append(self.parse_packet(data))
 
-            while self.parse_packet(data):
-                pass
+        return TransmissionHandler.operator(type_int, operands)
 
-
-
-        return True
+    @classmethod
+    def operator(cls, type_id, operands):
+        if type_id == 0:
+            return sum(operands)
+        if type_id == 1:
+            return math.prod(operands)
+        if type_id == 2:
+            return min(operands)
+        if type_id == 3:
+            return max(operands)
+        if type_id == 5:
+            return 1 if operands[0] > operands[1] else 0
+        if type_id == 6:
+            return 1 if operands[0] < operands[1] else 0
+        if type_id == 7:
+            return 1 if operands[0] == operands[1] else 0
 
     def calculate_sum_of_packet_versions(self):
-        # print(self.data_bin)
         self.ind = 0
-        self.sum_of_version_numbers
-        print("-------------------")
+        self.sum_of_version_numbers = 0
         self.parse_packet(self.data_bin)
         return self.sum_of_version_numbers
+
+    def calculate_value_of_the_outermost_packet(self):
+        self.ind = 0
+        return self.parse_packet(self.data_bin)
 
 
 def parse_day16_data():
     with open("day16_a.txt", "r") as f:
         data = f.readline()
-
-    print(data)
-
     return data
 
 
@@ -1286,3 +1271,9 @@ def day16_a():
     data = parse_day16_data()
     handler = TransmissionHandler(data)
     print("day16_a = {}".format(handler.calculate_sum_of_packet_versions()))
+
+
+def day16_b():
+    data = parse_day16_data()
+    handler = TransmissionHandler(data)
+    print("day16_b = {}".format(handler.calculate_value_of_the_outermost_packet()))
