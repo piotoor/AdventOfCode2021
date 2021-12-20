@@ -1368,8 +1368,6 @@ class SnailfishCalculator:
             elif to_update_indices[1] == -1:
                 to_update_indices[1] = i
 
-        # print("explode_indices = {}, update_indices = {}".format(to_explode_indices, to_update_indices))
-
         if len(to_explode_indices) < 2:
             return False, new_number
         if to_update_indices[0] != -1:
@@ -1451,12 +1449,24 @@ class SnailfishCalculator:
 
             stack.append(curr)
 
-        print(stack)
         return stack[-1][0]
 
     def calculate_total_magnitude(self):
         final_number = SnailfishCalculator.chain_add(self.data)
         return SnailfishCalculator.calculate_magnitude(final_number)
+
+    def calculate_largest_sum_of_two_numbers(self):
+        max_sum = 0
+        for a in self.data:
+            for b in self.data:
+                if a != b:
+                    a_b = SnailfishCalculator.chain_add([a, b])
+                    b_a = SnailfishCalculator.chain_add([b, a])
+                    a_b_magnitude = SnailfishCalculator.calculate_magnitude(a_b)
+                    b_a_magnitude = SnailfishCalculator.calculate_magnitude(b_a)
+                    max_sum = max(max_sum, a_b_magnitude, b_a_magnitude)
+
+        return max_sum
 
 
 def parse_day18_data():
@@ -1484,3 +1494,9 @@ def day18_a():
     data = parse_day18_data()
     calc = SnailfishCalculator(data)
     print("day18_a = {}".format(calc.calculate_total_magnitude()))
+
+
+def day18_b():
+    data = parse_day18_data()
+    calc = SnailfishCalculator(data)
+    print("day18_b = {}".format(calc.calculate_largest_sum_of_two_numbers()))

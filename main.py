@@ -38,3 +38,4 @@ if __name__ == '__main__':
     # solutions.day17_b()
 
     solutions.day18_a()
+    solutions.day18_b()
