@@ -206,7 +206,7 @@ class Day8(unittest.TestCase):
 
 class Day9(unittest.TestCase):
     @parameterized.expand([
-        ("aoc example",  [
+        ("aoc example", [
             [2, 1, 9, 9, 9, 4, 3, 2, 1, 0],
             [3, 9, 8, 7, 8, 9, 4, 9, 2, 1],
             [9, 8, 5, 6, 7, 8, 9, 8, 9, 2],
@@ -233,7 +233,7 @@ class Day9(unittest.TestCase):
         self.assertEqual(expected, solutions.calculate_sum_of_the_risk_levels(data))
 
     @parameterized.expand([
-        ("aoc example",  [
+        ("aoc example", [
             [2, 1, 9, 9, 9, 4, 3, 2, 1, 0],
             [3, 9, 8, 7, 8, 9, 4, 9, 2, 1],
             [9, 8, 5, 6, 7, 8, 9, 8, 9, 2],
@@ -337,7 +337,7 @@ class Day10(unittest.TestCase):
             "[[",  # 12
             "{{",  # 18
             "<<",  # 24
-            "(<"   # 21
+            "(<"  # 21
         ], 18),
         ("aoc example", [
             "[({(<(())[]>[[{[]{<()<>>",
@@ -585,17 +585,17 @@ class Day14(unittest.TestCase):
 class Day15(unittest.TestCase):
     @parameterized.expand([
         ("aoc example 1", [
-             [1, 1, 6, 3, 7, 5, 1, 7, 4, 2],
-             [1, 3, 8, 1, 3, 7, 3, 6, 7, 2],
-             [2, 1, 3, 6, 5, 1, 1, 3, 2, 8],
-             [3, 6, 9, 4, 9, 3, 1, 5, 6, 9],
-             [7, 4, 6, 3, 4, 1, 7, 1, 1, 1],
-             [1, 3, 1, 9, 1, 2, 8, 1, 3, 7],
-             [1, 3, 5, 9, 9, 1, 2, 4, 2, 1],
-             [3, 1, 2, 5, 4, 2, 1, 6, 3, 9],
-             [1, 2, 9, 3, 1, 3, 8, 5, 2, 1],
-             [2, 3, 1, 1, 9, 4, 4, 5, 8, 1],
-         ], 40),
+            [1, 1, 6, 3, 7, 5, 1, 7, 4, 2],
+            [1, 3, 8, 1, 3, 7, 3, 6, 7, 2],
+            [2, 1, 3, 6, 5, 1, 1, 3, 2, 8],
+            [3, 6, 9, 4, 9, 3, 1, 5, 6, 9],
+            [7, 4, 6, 3, 4, 1, 7, 1, 1, 1],
+            [1, 3, 1, 9, 1, 2, 8, 1, 3, 7],
+            [1, 3, 5, 9, 9, 1, 2, 4, 2, 1],
+            [3, 1, 2, 5, 4, 2, 1, 6, 3, 9],
+            [1, 2, 9, 3, 1, 3, 8, 5, 2, 1],
+            [2, 3, 1, 1, 9, 4, 4, 5, 8, 1],
+        ], 40),
         ("own example 1", [
             [1, 9, 6, 3, 7, 5, 1, 7, 4, 2],
             [1, 9, 8, 1, 3, 7, 3, 6, 7, 2],
@@ -642,17 +642,17 @@ class Day15(unittest.TestCase):
             [1, 1],
             [1, 1],
         ], [
-            [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
-            [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
-            [2, 2, 3, 3, 4, 4, 5, 5, 6, 6],
-            [2, 2, 3, 3, 4, 4, 5, 5, 6, 6],
-            [3, 3, 4, 4, 5, 5, 6, 6, 7, 7],
-            [3, 3, 4, 4, 5, 5, 6, 6, 7, 7],
-            [4, 4, 5, 5, 6, 6, 7, 7, 8, 8],
-            [4, 4, 5, 5, 6, 6, 7, 7, 8, 8],
-            [5, 5, 6, 6, 7, 7, 8, 8, 9, 9],
-            [5, 5, 6, 6, 7, 7, 8, 8, 9, 9]
-        ]),
+             [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+             [1, 1, 2, 2, 3, 3, 4, 4, 5, 5],
+             [2, 2, 3, 3, 4, 4, 5, 5, 6, 6],
+             [2, 2, 3, 3, 4, 4, 5, 5, 6, 6],
+             [3, 3, 4, 4, 5, 5, 6, 6, 7, 7],
+             [3, 3, 4, 4, 5, 5, 6, 6, 7, 7],
+             [4, 4, 5, 5, 6, 6, 7, 7, 8, 8],
+             [4, 4, 5, 5, 6, 6, 7, 7, 8, 8],
+             [5, 5, 6, 6, 7, 7, 8, 8, 9, 9],
+             [5, 5, 6, 6, 7, 7, 8, 8, 9, 9]
+         ]),
         ("own example 2", [
             [1, 2],
             [3, 4],
@@ -677,17 +677,17 @@ class Day15(unittest.TestCase):
 
     @parameterized.expand([
         ("aoc example 1", [
-             [1, 1, 6, 3, 7, 5, 1, 7, 4, 2],
-             [1, 3, 8, 1, 3, 7, 3, 6, 7, 2],
-             [2, 1, 3, 6, 5, 1, 1, 3, 2, 8],
-             [3, 6, 9, 4, 9, 3, 1, 5, 6, 9],
-             [7, 4, 6, 3, 4, 1, 7, 1, 1, 1],
-             [1, 3, 1, 9, 1, 2, 8, 1, 3, 7],
-             [1, 3, 5, 9, 9, 1, 2, 4, 2, 1],
-             [3, 1, 2, 5, 4, 2, 1, 6, 3, 9],
-             [1, 2, 9, 3, 1, 3, 8, 5, 2, 1],
-             [2, 3, 1, 1, 9, 4, 4, 5, 8, 1],
-         ], 315)
+            [1, 1, 6, 3, 7, 5, 1, 7, 4, 2],
+            [1, 3, 8, 1, 3, 7, 3, 6, 7, 2],
+            [2, 1, 3, 6, 5, 1, 1, 3, 2, 8],
+            [3, 6, 9, 4, 9, 3, 1, 5, 6, 9],
+            [7, 4, 6, 3, 4, 1, 7, 1, 1, 1],
+            [1, 3, 1, 9, 1, 2, 8, 1, 3, 7],
+            [1, 3, 5, 9, 9, 1, 2, 4, 2, 1],
+            [3, 1, 2, 5, 4, 2, 1, 6, 3, 9],
+            [1, 2, 9, 3, 1, 3, 8, 5, 2, 1],
+            [2, 3, 1, 1, 9, 4, 4, 5, 8, 1],
+        ], 315)
     ])
     def test_find_path_of_the_lowest_risk_extended(self, _, data, expected):
         pathfinder = solutions.WeightedPathfinder(data)
@@ -739,3 +739,92 @@ class Day17(unittest.TestCase):
         launcher = solutions.ProbeLauncher(data)
         launcher.compute()
         self.assertEqual(expected, launcher.count_initial_velocities())
+
+
+class Day18(unittest.TestCase):
+    @parameterized.expand([
+        ("aoc example 1", [[9, 4], [8, 4], [1, 3], [2, 2], [3, 1], [4, 0]],
+         [[0, 3], [9, 3], [2, 2], [3, 1], [4, 0]]),
+        ("aoc example 2", [[7, 0], [6, 1], [5, 2], [4, 3], [3, 4], [2, 4]],
+         [[7, 0], [6, 1], [5, 2], [7, 3], [0, 3]]),
+        ("aoc example 3", [[6, 1], [5, 2], [4, 3], [3, 4], [2, 4], [1, 0]],
+         [[6, 1], [5, 2], [7, 3], [0, 3], [3, 0]]),
+        ("aoc example 4", [[3, 1], [2, 2], [1, 3], [7, 4], [3, 4], [6, 1], [5, 2], [4, 3], [3, 4], [2, 4]],
+         [[3, 1], [2, 2], [8, 3], [0, 3], [9, 1], [5, 2], [4, 3], [3, 4], [2, 4]]),
+        ("aoc example 5", [[3, 1], [2, 2], [8, 3], [0, 3], [9, 1], [5, 2], [4, 3], [3, 4], [2, 4]],
+         [[3, 1], [2, 2], [8, 3], [0, 3], [9, 1], [5, 2], [7, 3], [0, 3]])
+    ])
+    def test_single_explode_performed(self, _, data, expected):
+        self.assertEqual((True, expected), solutions.SnailfishCalculator.explode(data))
+
+    @parameterized.expand([
+        ("aoc example 1", [[1, 0], [1, 0]],
+         [[1, 0], [1, 0]]),
+        ("aoc example 2", [[1, 0], [1, 0], [9, 1], [9, 1]],
+         [[1, 0], [1, 0], [9, 1], [9, 1]]),
+    ])
+    def test_single_explode_not_performed(self, _, data, expected):
+        self.assertEqual((False, expected), solutions.SnailfishCalculator.explode(data))
+
+    @parameterized.expand([
+        ("aoc example 1", [[0, 3], [7, 3], [4, 2], [15, 2], [0, 3], [13, 3], [1, 1], [1, 1]],
+         [[0, 3], [7, 3], [4, 2], [7, 3], [8, 3], [0, 3], [13, 3], [1, 1], [1, 1]]),
+        ("aoc example 2", [[0, 3], [7, 3], [4, 2], [7, 3], [8, 3], [0, 3], [13, 3], [1, 1], [1, 1]],
+         [[0, 3], [7, 3], [4, 2], [7, 3], [8, 3], [0, 3], [6, 4], [7, 4], [1, 1], [1, 1]]),
+    ])
+    def test_single_split_performed(self, _, data, expected):
+        self.assertEqual((True, expected), solutions.SnailfishCalculator.split(data))
+
+    @parameterized.expand([
+        ("aoc example 1", [[1, 0], [1, 0]],
+         [[1, 0], [1, 0]]),
+        ("aoc example 2", [[1, 0], [1, 0], [9, 1], [9, 1]],
+         [[1, 0], [1, 0], [9, 1], [9, 1]]),
+    ])
+    def test_single_split_not_performed(self, _, data, expected):
+        self.assertEqual((False, expected), solutions.SnailfishCalculator.split(data))
+
+    @parameterized.expand([
+        ("aoc example 1", [[1, 0], [2, 0]],
+         [[3, 1], [4, 1], [5, 0]],
+         [[1, 1], [2, 1], [3, 2], [4, 2], [5, 1]])
+    ])
+    def test_single_add(self, _, num1, num2, expected):
+        self.assertEqual(expected, solutions.SnailfishCalculator.add(num1, num2))
+
+    @parameterized.expand([
+        ("aoc example 1", [[[1, 0], [1, 0]],
+                           [[2, 0], [2, 0]],
+                           [[3, 0], [3, 0]],
+                           [[4, 0], [4, 0]]],
+         [[1, 3], [1, 3], [2, 3], [2, 3], [3, 2], [3, 2], [4, 1], [4, 1]]),
+        ("aoc example 2", [[[1, 0], [1, 0]],
+                           [[2, 0], [2, 0]],
+                           [[3, 0], [3, 0]],
+                           [[4, 0], [4, 0]],
+                           [[5, 0], [5, 0]]],
+         [[3, 3], [0, 3], [5, 3], [3, 3], [4, 2], [4, 2], [5, 1], [5, 1]]),
+        ("aoc example 3", [[[1, 0], [1, 0]],
+                           [[2, 0], [2, 0]],
+                           [[3, 0], [3, 0]],
+                           [[4, 0], [4, 0]],
+                           [[5, 0], [5, 0]],
+                           [[6, 0], [6, 0]]],
+         [[5, 3], [0, 3], [7, 3], [4, 3], [5, 2], [5, 2], [6, 1], [6, 1]]),
+        ("aoc example 4", [[[0, 2], [4, 3], [5, 3], [0, 2], [0, 2], [4, 3], [5, 3], [2, 3], [6, 3], [9, 2], [5, 2]],
+                           [[7, 0], [3, 3], [7, 3], [4, 3], [3, 3], [6, 3], [3, 3], [8, 3], [8, 3]],
+                           [[2, 1], [0, 3], [8, 3], [3, 3], [4, 3], [6, 3], [7, 3], [1, 2], [7, 2], [1, 3], [6, 3]]],
+         [[6, 3], [7, 3], [6, 3], [7, 3], [7, 3], [7, 3], [0, 3], [7, 3], [8, 3], [7, 3], [7, 3], [7, 3], [8, 3], [8, 3], [8, 3], [0, 3]])
+    ])
+    def test_chain_add(self, _, numbers, expected):
+        self.assertEqual(expected, solutions.SnailfishCalculator.chain_add(numbers))
+
+    @parameterized.expand([
+        ("aoc example 1", [[9, 0], [1, 0]], 29),
+        ("aoc example 2", [[1, 0], [9, 0]], 21),
+        ("aoc example 3", [[9, 1], [1, 1], [1, 1], [9, 1]], 129),
+        ("aoc example 4", [[1, 1], [2, 1], [3, 2], [4, 2], [5, 1]], 143),
+        ("aoc example 5", [[0, 3], [7, 3], [4, 2], [7, 3], [8, 3], [6, 3], [0, 3], [8, 1], [1, 1]], 1384)
+    ])
+    def test_calculate_magnitude(self, _, data, expected):
+        self.assertEqual(expected, solutions.SnailfishCalculator.calculate_magnitude(data))
