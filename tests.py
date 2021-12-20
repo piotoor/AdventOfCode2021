@@ -729,4 +729,13 @@ class Day17(unittest.TestCase):
     ])
     def test_find_highest_y(self, _, data, expected):
         launcher = solutions.ProbeLauncher(data)
+        launcher.compute()
         self.assertEqual(expected, launcher.find_highest_y())
+
+    @parameterized.expand([
+        ("aoc example 1", (20, 30, -10, -5), 112),
+    ])
+    def test_find_highest_y(self, _, data, expected):
+        launcher = solutions.ProbeLauncher(data)
+        launcher.compute()
+        self.assertEqual(expected, launcher.count_initial_velocities())
