@@ -721,3 +721,12 @@ class Day16(unittest.TestCase):
     def test_calculate_value_of_the_outermost_packet(self, _, data, expected):
         handler = solutions.TransmissionHandler(data)
         self.assertEqual(expected, handler.calculate_value_of_the_outermost_packet())
+
+
+class Day17(unittest.TestCase):
+    @parameterized.expand([
+        ("aoc example 1", (20, 30, -10, -5), 45),
+    ])
+    def test_find_highest_y(self, _, data, expected):
+        launcher = solutions.ProbeLauncher(data)
+        self.assertEqual(expected, launcher.find_highest_y())

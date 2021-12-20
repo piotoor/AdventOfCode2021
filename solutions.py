@@ -1277,3 +1277,20 @@ def day16_b():
     data = parse_day16_data()
     handler = TransmissionHandler(data)
     print("day16_b = {}".format(handler.calculate_value_of_the_outermost_packet()))
+
+
+def parse_day17_data():
+    pass
+
+
+class ProbeLauncher:
+    def __init__(self, data):
+        self.target_area = data
+
+    def find_highest_y(self):
+        return 0
+
+
+def day17_a():
+    data = parse_day17_data()
+    print("day17_a = {}".format(0))
