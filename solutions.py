@@ -1280,7 +1280,13 @@ def day16_b():
 
 
 def parse_day17_data():
-    pass
+    data = []
+    with open("day17_a.txt", "r") as f:
+        line = f.readline()[13:].split(", ")
+        for coords in line:
+            data.extend((coords[2:].split("..")))
+
+    return tuple(int(x) for x in data)
 
 
 class ProbeLauncher:
@@ -1288,9 +1294,36 @@ class ProbeLauncher:
         self.target_area = data
 
     def find_highest_y(self):
-        return 0
+        t_x0, t_x1, t_y0, t_y1 = self.target_area
+        start_x, start_y = 0, 0
+        highest_y_values = []
+        max_v_y = 150
+
+        for vx_init in range(0, t_x1 + 1):
+            for vy_init in range(0, max_v_y):   # todo upper
+                v_x = vx_init
+                v_y = vy_init
+                pos_x = start_x
+                pos_y = start_y
+                max_y = pos_y
+
+                while pos_x <= t_x1 and pos_y >= t_y0:
+                    pos_x += v_x
+                    pos_y += v_y
+                    max_y = max(max_y, pos_y)
+
+                    if t_x0 <= pos_x <= t_x1 and t_y0 <= pos_y <= t_y1:
+                        highest_y_values.append(max_y)
+                        break
+
+                    if v_x > 0:
+                        v_x -= 1
+                    v_y -= 1
+
+        return max(highest_y_values)
 
 
 def day17_a():
     data = parse_day17_data()
-    print("day17_a = {}".format(0))
+    launcher = ProbeLauncher(data)
+    print("day17_a = {}".format(launcher.find_highest_y()))
