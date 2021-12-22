@@ -8,7 +8,7 @@ import time
 import heapq
 import copy
 import math
-
+import numpy as np
 
 sys.setrecursionlimit(15000)
 
@@ -1500,3 +1500,219 @@ def day18_b():
     data = parse_day18_data()
     calc = SnailfishCalculator(data)
     print("day18_b = {}".format(calc.calculate_largest_sum_of_two_numbers()))
+
+
+class BeaconHandler:
+    def __init__(self, data):
+        self.scanners = data
+        self.scanners_all_orientations = []
+
+        self.scanners_rotations = {0: (0, 0)}
+        self.scanners_positions = {0: (0, 0, 0)}
+        # self.scanners_all_rot = []
+
+        # for s in self.scanners:
+        #     new_s = []
+        #     for b in s:
+        #         new_s.extend(BeaconHandler.compute_all_point_rotations(b))
+        #     self.scanners_all_rot.append(new_s)
+
+        self.diffs = {}
+
+
+        # self.unique_beacons = set(self.scanners[0])
+
+    @classmethod
+    def rotate_x(cls, point, num_of_rot):
+        num_of_rot %= 4
+        x, y, z = point
+        if num_of_rot == 1:
+            return [x, z, -y]
+        elif num_of_rot == 2:
+            return [x, -y, -z]
+        elif num_of_rot == 3:
+            return [x, -z, y]
+        else:
+            return point
+
+    @classmethod
+    def rotate_y(cls, point, num_of_rot):
+        num_of_rot %= 4
+        x, y, z = point
+        if num_of_rot == 1:
+            return [-z, y, x]
+        elif num_of_rot == 2:
+            return [-x, y, -z]
+        elif num_of_rot == 3:
+            return [z, y, -x]
+        else:
+            return point
+
+    @classmethod
+    def rotate_z(cls, point, num_of_rot):
+        num_of_rot %= 4
+        x, y, z = point
+        if num_of_rot == 1:
+            return [y, -x, z]
+        elif num_of_rot == 2:
+            return [-x, -y, z]
+        elif num_of_rot == 3:
+            return [-y, x, z]
+        else:
+            return point
+
+    @classmethod
+    def compute_all_point_rotations(cls, point):
+        ans = []
+
+        for other_rot in range(len(BeaconHandler.rotations)):
+            for y_rot in range(4):
+                rot, deg = BeaconHandler.rotations[other_rot]
+                ans.append(BeaconHandler.rotate_y(rot(point, deg), y_rot))
+
+        return ans
+
+    def find_scanners_rotations(self):
+        for i in range(len(self.scanners)):
+            for j in range(len(self.scanners_all_orientations)):
+                if i == j or j in self.scanners_rotations:
+                    continue
+                for rot in self.scanners_all_orientations[j]:
+                    curr_diffs = {}
+
+                    for x in self.scanners[i]:
+                        for y in self.scanners_all_orientations[j][rot]:
+                            diff = (x[0] - y[0], x[1] - y[1], x[2] - y[2])
+                            if diff in curr_diffs:
+                                curr_diffs[diff] += 1
+                            else:
+                                curr_diffs[diff] = 1
+
+                    most_freq_diff = max(curr_diffs, key=curr_diffs.get)
+                    max_diff_val = max(curr_diffs.values())
+
+                    if max_diff_val > 11:
+                        print("{} {} {}".format(i, j, rot))
+                        self.scanners_rotations[j] = rot
+                        self.diffs[(i, j)] = most_freq_diff
+
+    @classmethod
+    def rotate(cls, point, rot):
+        zx, y = rot
+        zx_fun, zx_deg = BeaconHandler.rotations[zx]
+        return BeaconHandler.rotate_y(zx_fun(point, zx_deg), y)
+
+    @classmethod
+    def rotate_inv(cls, point, rot):
+        zx, y = rot
+        if y % 2 != 0:
+            y = (y + 2) % 4
+        zx_fun, zx_deg = BeaconHandler.rotations_inv[zx]
+        return zx_fun(BeaconHandler.rotate_y(point, y), zx_deg)
+
+    def find_scanners_all_orientations(self):
+        for i in range(len(self.scanners)):
+            self.scanners_all_orientations.append({})
+            for other_rot in range(len(BeaconHandler.rotations)):
+                for y_rot in range(4):
+                    rotated_beacons = []
+                    # rot, deg = BeaconHandler.rotations[other_rot]
+                    for b in self.scanners[i]:
+                        # rotated_beacons.append(BeaconHandler.rotate_y(rot(b, deg), y_rot))
+                        rotated_beacons.append(BeaconHandler.rotate(b, (other_rot, y_rot)))
+                    self.scanners_all_orientations[i][(other_rot, y_rot)] = rotated_beacons
+
+    def count_beacons(self):
+        self.find_scanners_all_orientations()
+        self.find_scanners_rotations()
+        print("self.diffs = {}".format(self.diffs))
+
+        rotations_table = [[None for _ in range(len(self.scanners))] for _ in range(len(self.scanners))]
+
+        for scanners, diff in self.diffs.items():
+            a, b = scanners
+            rot = self.scanners_rotations[a]
+            rotations_table[a][b] = rot
+
+        print(rotations_table)
+
+        while len(self.diffs) > 0:
+            for scanners_pair, diff in self.diffs.items():
+                print(scanners_pair)
+                i, j = scanners_pair
+
+                # rot = self.scanners_rotations[i]
+                # rotations.append(rot)
+                # if j == 2:
+                #     for xx in range(6):
+                #         for yy in range(4):
+                #             print("diff[{}, {}] = {}".format(xx, yy, BeaconHandler.rotate(diff, (xx, yy))))
+
+                # diff = BeaconHandler.rotations[first_rot][0](diff, BeaconHandler.rotations[first_rot][1])
+                # diff = BeaconHandler.rotate_y(diff, y_rot)
+
+
+
+                # diff = BeaconHandler.rotate(diff, rot)
+                rotations = []
+
+                curr_scanner = j
+                while curr_scanner != 0:
+                    for r in range(0, len(rotations_table)):
+                        rotation = rotations_table[r][curr_scanner]
+                        if rotation is not None:
+                            rotations.append(rotation)
+                            curr_scanner = r
+                            break
+
+                print("rotations = {}".format(rotations))
+                print("diff[j] = {}".format(diff))
+
+                print("diff normally = {}".format(BeaconHandler.rotate(diff, rot)))
+                while len(rotations) > 0:
+                    diff = BeaconHandler.rotate(diff, rotations[0])
+                    print("diff after {} = {}".format(rotations[0], diff))
+                    rotations.pop(0)
+
+                x, y, z = diff
+
+                if j not in self.scanners_positions and i in self.scanners_positions:
+                    print("kupa = {}".format(j))
+                    x_i, y_i, z_i = self.scanners_positions[i]
+                    self.scanners_positions[j] = (x_i + x, y_i + y, z_i + z)
+                    # self.scanners_positions[j] = (x - x_i, y - y_i, z - z_i)
+
+                del self.diffs[scanners_pair]
+                break
+
+
+        print("scanners positions = {}".format(self.scanners_positions))
+        print("scanners rotations = {}".format(self.scanners_rotations))
+
+
+BeaconHandler.rotations = [
+    (BeaconHandler.rotate_z, 0),
+    (BeaconHandler.rotate_z, 2),
+    (BeaconHandler.rotate_x, 1),
+    (BeaconHandler.rotate_x, 3),
+    (BeaconHandler.rotate_z, 1),
+    (BeaconHandler.rotate_z, 3)
+]
+
+
+BeaconHandler.rotations_inv = [
+    (BeaconHandler.rotate_z, 0),
+    (BeaconHandler.rotate_z, 2),
+    (BeaconHandler.rotate_x, 3),
+    (BeaconHandler.rotate_x, 1),
+    (BeaconHandler.rotate_z, 3),
+    (BeaconHandler.rotate_z, 1)
+]
+
+
+def parse_day19_data():
+    pass
+
+
+def day19_a():
+    pass
