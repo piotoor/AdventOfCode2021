@@ -1506,14 +1506,12 @@ class BeaconHandler:
     def __init__(self, data):
         self.scanners = data
         self.scanners_all_orientations = []
-
         self.scanners_rotations = {0: (0, 0)}
         self.scanners_positions = {0: (0, 0, 0)}
 
         self.diffs = {}
-
         self.rotations_table = [[None for _ in range(len(self.scanners))] for _ in range(len(self.scanners))]
-
+        self.deps = {}
 
     @classmethod
     def rotate_x(cls, point, num_of_rot):
@@ -1554,17 +1552,6 @@ class BeaconHandler:
         else:
             return point
 
-    @classmethod
-    def compute_all_point_rotations(cls, point):
-        ans = []
-
-        for other_rot in range(len(BeaconHandler.rotations)):
-            for y_rot in range(4):
-                rot, deg = BeaconHandler.rotations[other_rot]
-                ans.append(BeaconHandler.rotate_y(rot(point, deg), y_rot))
-
-        return ans
-
     def find_scanners_rotations(self):
         for i in range(len(self.scanners)):
             for j in range(len(self.scanners_all_orientations)):
@@ -1596,6 +1583,15 @@ class BeaconHandler:
         return BeaconHandler.rotate_y(zx_fun(point, zx_deg), y)
 
     @classmethod
+    def rotate_list_of_points(cls, points, rot):
+        ans = []
+
+        for p in points:
+            ans.append(BeaconHandler.rotate(p, rot))
+
+        return ans
+
+    @classmethod
     def rotate_inv(cls, point, rot):
         zx, y = rot
         if y % 2 != 0:
@@ -1616,19 +1612,19 @@ class BeaconHandler:
 
     def find_scanner_positions(self):
         print("self.diffs = {}".format(self.diffs))
-
-
         while len(self.diffs) > 0:
             for scanners_pair, diff in self.diffs.items():
                 print(scanners_pair)
                 i, j = scanners_pair
 
                 curr_scanner = j
+
                 while curr_scanner != 0:
                     for r in range(0, len(self.rotations_table)):
                         rotation = self.rotations_table[r][curr_scanner]
                         if rotation is not None:
                             diff = BeaconHandler.rotate(diff, rotation)
+
                             curr_scanner = r
                             break
 
@@ -1660,18 +1656,44 @@ class BeaconHandler:
             self.rotations_table[a][b] = rot
         print(self.rotations_table)
 
+    def compute_scanners_rotations_deps(self):
+        for i in range(len(self.scanners)):
+            curr_scanner = i
+            curr_deps = [i]
+            while curr_scanner != 0:
+                for r in range(0, len(self.rotations_table)):
+                    rotation = self.rotations_table[r][curr_scanner]
+                    if rotation is not None:
+                        curr_scanner = r
+                        curr_deps.append(curr_scanner)
+                        break
+            self.deps[i] = curr_deps
+
+        print("deps = {}".format(self.deps))
+
+    def rotate_scanners(self):
+        already_rotated = set()
+        for d in self.deps:
+            while len(self.deps[d]) > 0:
+                self.scanners[d] = BeaconHandler.rotate_list_of_points(self.scanners[d], self.scanners_rotations[self.deps[d][0]])
+                print("rotating {} by {}".format(d, self.scanners_rotations[self.deps[d][-1]]))
+                self.deps[d].pop(0)
+
     def count_beacons(self):
         self.find_scanners_all_orientations()
         self.find_scanners_rotations()
         self.compute_rotation_table()
+        self.compute_scanners_rotations_deps()
         self.find_scanner_positions()
+        self.rotate_scanners()
         self.adjust_beacons_with_scanners_positions()
 
         unique_beacons = set()
         for s in self.scanners:
             for b in s:
-                unique_beacons.update(b)
+                unique_beacons.add(tuple(b))
 
+        print(unique_beacons)
         return len(unique_beacons)
 
 
@@ -1696,8 +1718,19 @@ BeaconHandler.rotations_inv = [
 
 
 def parse_day19_data():
-    pass
+    with open("day19_a.txt", "r") as f:
+        data = []
+        for line in non_blank_lines(f):
+            if line[0:3] == '---':
+                data.append([])
+            else:
+                data[-1].append(list(map(int, line.split(","))))
+
+    return data
 
 
 def day19_a():
-    pass
+    data = parse_day19_data()
+    print(data)
+    handler = BeaconHandler(data)
+    print("day19_a = {}".format(handler.count_beacons()))

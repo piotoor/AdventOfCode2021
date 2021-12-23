@@ -1028,43 +1028,6 @@ class Day19(unittest.TestCase):
         self.assertEqual(expected, solutions.BeaconHandler.rotate_z(point, theta))
 
     @parameterized.expand([
-        ("rotate 1", [1, 2, 3], [
-            [1, 2, 3],
-            [-3, 2, 1],
-            [-1, 2, -3],
-            [3, 2, -1],
-
-            [-1, -2, 3],
-            [-3, -2, -1],
-            [1, -2, -3],
-            [3, -2, 1],
-
-            [1, 3, -2],
-            [2, 3, 1],
-            [-1, 3, 2],
-            [-2, 3, -1],
-
-            [1, -3, 2],
-            [-2, -3, 1],
-            [-1, -3, -2],
-            [2, -3, -1],
-
-            [2, -1, 3],
-            [-3, -1, 2],
-            [-2, -1, -3],
-            [3, -1, -2],
-
-            [-2, 1, 3],
-            [-3, 1, -2],
-            [2, 1, -3],
-            [3, 1, 2]
-        ]),
-
-    ])
-    def test_compute_all_point_rotations(self, _, point, expected):
-        self.assertEqual(expected, solutions.BeaconHandler.compute_all_point_rotations(point))
-
-    @parameterized.expand([
         ("rotate 1", [1, 2, 3], (0, 0)),
         ("rotate 2", [1, 2, 3], (0, 1)),
         ("rotate 3", [1, 2, 3], (0, 2)),
