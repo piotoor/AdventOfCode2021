@@ -995,66 +995,49 @@ class Day19(unittest.TestCase):
         self.assertEqual(expected, handler.count_beacons())
 
     @parameterized.expand([
-        ("rotate x 90 1", [0, 0, 0], 1, [0, 0, 0]),
-        ("rotate x 180 1", [0, 0, 0], 2, [0, 0, 0]),
-        ("rotate x 270 1", [0, 0, 0], 3,  [0, 0, 0]),
-        ("rotate x 90 2", [1, 2, 3], 1, [1, 3, -2]),
-        ("rotate x 180 2", [1, 2, 3], 2,  [1, -2, -3]),
-        ("rotate x 270 2", [1, 2, 3], 3, [1, -3, 2]),
+        ("rotate x1", [1, 2, 3], [0], [1, 3, -2]),
+        ("rotate x2", [1, 2, 3], [1], [1, -2, -3]),
+        ("rotate x3", [1, 2, 3], [2], [1, -3, 2]),
+
+        ("rotate y1", [1, 2, 3], [3], [-3, 2, 1]),
+        ("rotate y2", [1, 2, 3], [4], [-1, 2, -3]),
+        ("rotate y3", [1, 2, 3], [5], [3, 2, -1]),
+
+        ("rotate z1", [1, 2, 3], [6], [2, -1, 3]),
+        ("rotate z2", [1, 2, 3], [7], [-1, -2, 3]),
+        ("rotate z3", [1, 2, 3], [8], [-2, 1, 3]),
     ])
-    def test_rotate_x(self, _, point, theta, expected):
-        self.assertEqual(expected, solutions.BeaconHandler.rotate_x(point, theta))
+    def test_rotate(self, _, point, rot, expected):
+        self.assertEqual(expected, solutions.BeaconHandler.rotate(point, rot))
 
     @parameterized.expand([
-        ("rotate y 90 1", [0, 0, 0], 1, [0, 0, 0]),
-        ("rotate y 180 1", [0, 0, 0], 2, [0, 0, 0]),
-        ("rotate y 270 1", [0, 0, 0], 3, [0, 0, 0]),
-        ("rotate y 90 2", [1, 2, 3], 1, [-3, 2, 1]),
-        ("rotate y 180 2", [1, 2, 3], 2, [-1, 2, -3]),
-        ("rotate y 270 2", [1, 2, 3], 3, [3, 2, -1]),
-    ])
-    def test_rotate_y(self, _, point, theta, expected):
-        self.assertEqual(expected, solutions.BeaconHandler.rotate_y(point, theta))
+        ("single point", [[1, 2, 3]], [
+            [1, 2, 3],
+            [-3, 2, 1],
+            [-1, 2, -3],
+            [3, 2, -1],
+            [1, 3, -2],
+            [2, 3, 1],
+            [-1, 3, 2],
+            [-2, 3, -1],
+            [1, -2, -3],
+            [3, -2, 1],
+            [-1, -2, 3],
+            [-3, -2, -1],
+            [1, -3, 2],
+            [-2, -3, 1],
+            [-1, -3, -2],
+            [2, -3, -1],
+            [2, -1, 3],
+            [-3, -1, 2],
+            [-2, -1, -3],
+            [3, -1, -2],
+            [-2, 1, 3],
+            [-3, 1, -2],
+            [2, 1, -3],
+            [3, 1, 2],
+        ]),
 
-    @parameterized.expand([
-        ("rotate z 90 1", [0, 0, 0], 1, [0, 0, 0]),
-        ("rotate z 180 1", [0, 0, 0], 2, [0, 0, 0]),
-        ("rotate z 270 1", [0, 0, 0], 3, [0, 0, 0]),
-        ("rotate z 90 2", [1, 2, 3], 1, [2, -1, 3]),
-        ("rotate z 180 2", [1, 2, 3], 2, [-1, -2, 3]),
-        ("rotate z 270 2", [1, 2, 3], 3, [-2, 1, 3]),
     ])
-    def test_rotate_z(self, _, point, theta, expected):
-        self.assertEqual(expected, solutions.BeaconHandler.rotate_z(point, theta))
-
-    @parameterized.expand([
-        ("rotate 1", [1, 2, 3], (0, 0)),
-        ("rotate 2", [1, 2, 3], (0, 1)),
-        ("rotate 3", [1, 2, 3], (0, 2)),
-        ("rotate 4", [1, 2, 3], (0, 3)),
-        ("rotate 5", [1, 2, 3], (1, 0)),
-        ("rotate 6", [1, 2, 3], (1, 1)),
-        ("rotate 7", [1, 2, 3], (1, 2)),
-        ("rotate 8", [1, 2, 3], (1, 3)),
-        ("rotate 9", [1, 2, 3], (2, 0)),
-        ("rotate 10", [1, 2, 3], (2, 1)),
-        ("rotate 11", [1, 2, 3], (2, 2)),
-        ("rotate 12", [1, 2, 3], (2, 3)),
-
-        ("rotate 13", [1, 2, 3], (3, 0)),
-        ("rotate 14", [1, 2, 3], (3, 1)),
-        ("rotate 15", [1, 2, 3], (3, 2)),
-        ("rotate 16", [1, 2, 3], (3, 3)),
-        ("rotate 17", [1, 2, 3], (4, 0)),
-        ("rotate 18", [1, 2, 3], (4, 1)),
-        ("rotate 19", [1, 2, 3], (4, 2)),
-        ("rotate 20", [1, 2, 3], (4, 3)),
-        ("rotate 21", [1, 2, 3], (5, 0)),
-        ("rotate 22", [1, 2, 3], (5, 1)),
-        ("rotate 23", [1, 2, 3], (5, 2)),
-        ("rotate 24", [1, 2, 3], (5, 3)),
-    ])
-    def test_rotate_rotate_inv(self, _, point, rot):
-        new_point = solutions.BeaconHandler.rotate(point, rot)
-        solutions.BeaconHandler.rotate_inv(new_point, rot)
-        self.assertEqual(point, solutions.BeaconHandler.rotate_inv(new_point, rot))
+    def test_generate_all_rotations(self, _, points, expected):
+        self.assertEqual(expected, solutions.BeaconHandler.generate_all_rotations(points))
