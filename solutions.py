@@ -1509,18 +1509,11 @@ class BeaconHandler:
 
         self.scanners_rotations = {0: (0, 0)}
         self.scanners_positions = {0: (0, 0, 0)}
-        # self.scanners_all_rot = []
-
-        # for s in self.scanners:
-        #     new_s = []
-        #     for b in s:
-        #         new_s.extend(BeaconHandler.compute_all_point_rotations(b))
-        #     self.scanners_all_rot.append(new_s)
 
         self.diffs = {}
 
+        self.rotations_table = [[None for _ in range(len(self.scanners))] for _ in range(len(self.scanners))]
 
-        # self.unique_beacons = set(self.scanners[0])
 
     @classmethod
     def rotate_x(cls, point, num_of_rot):
@@ -1616,78 +1609,70 @@ class BeaconHandler:
             for other_rot in range(len(BeaconHandler.rotations)):
                 for y_rot in range(4):
                     rotated_beacons = []
-                    # rot, deg = BeaconHandler.rotations[other_rot]
+
                     for b in self.scanners[i]:
-                        # rotated_beacons.append(BeaconHandler.rotate_y(rot(b, deg), y_rot))
                         rotated_beacons.append(BeaconHandler.rotate(b, (other_rot, y_rot)))
                     self.scanners_all_orientations[i][(other_rot, y_rot)] = rotated_beacons
 
-    def count_beacons(self):
-        self.find_scanners_all_orientations()
-        self.find_scanners_rotations()
+    def find_scanner_positions(self):
         print("self.diffs = {}".format(self.diffs))
 
-        rotations_table = [[None for _ in range(len(self.scanners))] for _ in range(len(self.scanners))]
-
-        for scanners, diff in self.diffs.items():
-            a, b = scanners
-            rot = self.scanners_rotations[a]
-            rotations_table[a][b] = rot
-
-        print(rotations_table)
 
         while len(self.diffs) > 0:
             for scanners_pair, diff in self.diffs.items():
                 print(scanners_pair)
                 i, j = scanners_pair
 
-                # rot = self.scanners_rotations[i]
-                # rotations.append(rot)
-                # if j == 2:
-                #     for xx in range(6):
-                #         for yy in range(4):
-                #             print("diff[{}, {}] = {}".format(xx, yy, BeaconHandler.rotate(diff, (xx, yy))))
-
-                # diff = BeaconHandler.rotations[first_rot][0](diff, BeaconHandler.rotations[first_rot][1])
-                # diff = BeaconHandler.rotate_y(diff, y_rot)
-
-
-
-                # diff = BeaconHandler.rotate(diff, rot)
-                rotations = []
-
                 curr_scanner = j
                 while curr_scanner != 0:
-                    for r in range(0, len(rotations_table)):
-                        rotation = rotations_table[r][curr_scanner]
+                    for r in range(0, len(self.rotations_table)):
+                        rotation = self.rotations_table[r][curr_scanner]
                         if rotation is not None:
-                            rotations.append(rotation)
+                            diff = BeaconHandler.rotate(diff, rotation)
                             curr_scanner = r
                             break
 
-                print("rotations = {}".format(rotations))
                 print("diff[j] = {}".format(diff))
 
-                print("diff normally = {}".format(BeaconHandler.rotate(diff, rot)))
-                while len(rotations) > 0:
-                    diff = BeaconHandler.rotate(diff, rotations[0])
-                    print("diff after {} = {}".format(rotations[0], diff))
-                    rotations.pop(0)
-
                 x, y, z = diff
-
                 if j not in self.scanners_positions and i in self.scanners_positions:
                     print("kupa = {}".format(j))
                     x_i, y_i, z_i = self.scanners_positions[i]
                     self.scanners_positions[j] = (x_i + x, y_i + y, z_i + z)
-                    # self.scanners_positions[j] = (x - x_i, y - y_i, z - z_i)
 
                 del self.diffs[scanners_pair]
                 break
 
-
         print("scanners positions = {}".format(self.scanners_positions))
         print("scanners rotations = {}".format(self.scanners_rotations))
+
+    def adjust_beacons_with_scanners_positions(self):
+        for i in range(len(self.scanners)):
+            for j in range(len(self.scanners[i])):
+                self.scanners[i][j][0] += self.scanners_positions[i][0]
+                self.scanners[i][j][1] += self.scanners_positions[i][1]
+                self.scanners[i][j][2] += self.scanners_positions[i][2]
+
+    def compute_rotation_table(self):
+        for scanners, diff in self.diffs.items():
+            a, b = scanners
+            rot = self.scanners_rotations[a]
+            self.rotations_table[a][b] = rot
+        print(self.rotations_table)
+
+    def count_beacons(self):
+        self.find_scanners_all_orientations()
+        self.find_scanners_rotations()
+        self.compute_rotation_table()
+        self.find_scanner_positions()
+        self.adjust_beacons_with_scanners_positions()
+
+        unique_beacons = set()
+        for s in self.scanners:
+            for b in s:
+                unique_beacons.update(b)
+
+        return len(unique_beacons)
 
 
 BeaconHandler.rotations = [
