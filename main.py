@@ -39,3 +39,4 @@ if __name__ == '__main__':
     # solutions.day18_b()
 
     solutions.day19_a()
+    solutions.day19_b()
