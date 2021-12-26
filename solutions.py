@@ -9,6 +9,7 @@ import time
 import heapq
 import copy
 import math
+from operator import add, mul
 
 sys.setrecursionlimit(15000)
 
@@ -1732,7 +1733,7 @@ class ImageEnhancer:
                     for rr in range(r - 1, r + 2):
                         for cc in range(c - 1, c + 2):
                             binary += self.img[rr][cc]
-                            
+
                     alg_ind = int(binary, 2)
                     if self.alg[alg_ind] == '#':
                         target_img[r][c] = '1'
@@ -1769,3 +1770,84 @@ def day20_b():
     data = parse_day20_data()
     enhancer = ImageEnhancer(data)
     print("day20_b = {}".format(enhancer.count_lit_pixels(50)))
+
+
+class DiceRoller:
+    def __init__(self, data):
+        self.data = data
+        self.total_universes = 0
+        self.universes = [0, 0]
+        self.p = [0, 0, 0, 1, 3, 6, 7, 6, 3, 1]
+
+    def calculate_losing_score_x_num_of_rolls(self, dice_size):
+        players_pos = list(self.data)
+        players_score = [0, 0]
+
+        rolled = 1
+        player = 0
+        num_of_rolls = 0
+        while not any(x >= 1000 for x in players_score):
+            total_rolled = 0
+            for i in range(3):
+                num_of_rolls += 1
+                total_rolled += rolled
+                rolled = rolled % dice_size + 1
+
+            players_pos[player] = (players_pos[player] + total_rolled - 1) % 10 + 1
+            players_score[player] += players_pos[player]
+            player = (player + 1) % 2
+
+        return min(players_score) * num_of_rolls
+
+    def dfs(self, players_score, players_pos, num_of_universes, player, dice_size, depth):
+        if players_score[player] >= 21:
+            self.total_universes += num_of_universes
+            self.universes[player] += num_of_universes
+            return
+
+        player = (player + 1) % 2
+
+        # if (player, players_pos, players_score) in self.cache:
+        #     pass
+        # else:
+        #     pass
+        for total_rolled in range(3, 10):
+            pos_0, pos_1 = players_pos
+            new_players_pos = [pos_0, pos_1]
+            new_players_pos[player] = (players_pos[player] + total_rolled - 1) % 10 + 1
+            scr_0, scr_1 = players_score
+            new_players_score = [scr_0, scr_1]
+            new_players_score[player] += players_pos[player]
+            new_num_of_universes = self.p[total_rolled] * num_of_universes
+
+            self.dfs(new_players_score, new_players_pos, new_num_of_universes, player, dice_size, depth + 1)
+
+    def calculate_number_of_universes(self, dice_size):
+        players_pos = list(self.data)
+        players_score = [0, 0]
+        player = 0
+        num_of_universes = 1
+        self.dfs(copy.deepcopy(players_score), copy.deepcopy(players_pos), num_of_universes, player, dice_size, 0)
+        print(self.total_universes)
+        print(self.universes)
+
+
+def parse_day21_data():
+    with open("day21_a.txt", "r") as f:
+        data = [int(line.split(" ")[-1]) for line in non_blank_lines(f)]
+
+    return data
+
+
+def day21_a():
+    data = parse_day21_data()
+    roller = DiceRoller(data)
+    dice_size = 100
+    print("day21_a = {}".format(roller.calculate_losing_score_x_num_of_rolls(dice_size)))
+
+
+def day21_b():
+    data = parse_day21_data()
+    roller = DiceRoller(data)
+    dice_size = 3
+    print("day21_b = {}".format(roller.calculate_number_of_universes(dice_size)))

@@ -1071,3 +1071,19 @@ class Day20(unittest.TestCase):
     ])
     def test_apply_padding(self, _, img, padding_char, padding_size, expected):
         self.assertEqual(expected, solutions.ImageEnhancer.apply_padding(img, padding_char, padding_size))
+
+
+class Day21(unittest.TestCase):
+    @parameterized.expand([
+        ("aoc example 1", (4, 8), 100, 739785),
+    ])
+    def test_calculate_losing_score_x_num_of_rolls(self, _, players_pos, dice_size, expected):
+        roller = solutions.DiceRoller(players_pos)
+        self.assertEqual(expected, roller.calculate_losing_score_x_num_of_rolls(dice_size))
+
+    @parameterized.expand([
+        ("aoc example 1", (4, 8), 3, 444356092776315),
+    ])
+    def test_calculate_number_of_universes(self, _, players_pos, dice_size, expected):
+        roller = solutions.DiceRoller(players_pos)
+        self.assertEqual(expected, roller.calculate_number_of_universes(dice_size))
