@@ -1778,6 +1778,7 @@ class DiceRoller:
         self.total_universes = 0
         self.universes = [0, 0]
         self.p = [0, 0, 0, 1, 3, 6, 7, 6, 3, 1]
+        self.cache = {}
 
     def calculate_losing_score_x_num_of_rolls(self, dice_size):
         players_pos = list(self.data)
@@ -1803,33 +1804,41 @@ class DiceRoller:
         if players_score[player] >= 21:
             self.total_universes += num_of_universes
             self.universes[player] += num_of_universes
-            return
+            ans = [0, 0]
+            ans[player] = num_of_universes
+            return ans
 
         player = (player + 1) % 2
 
-        # if (player, players_pos, players_score) in self.cache:
-        #     pass
-        # else:
-        #     pass
-        for total_rolled in range(3, 10):
-            pos_0, pos_1 = players_pos
-            new_players_pos = [pos_0, pos_1]
-            new_players_pos[player] = (players_pos[player] + total_rolled - 1) % 10 + 1
-            scr_0, scr_1 = players_score
-            new_players_score = [scr_0, scr_1]
-            new_players_score[player] += players_pos[player]
-            new_num_of_universes = self.p[total_rolled] * num_of_universes
+        ans = [0, 0]
 
-            self.dfs(new_players_score, new_players_pos, new_num_of_universes, player, dice_size, depth + 1)
+        for total_rolled in range(3, 10):
+            cache_key = (player, tuple(players_pos), tuple(players_score), total_rolled)
+            if cache_key not in self.cache:
+                pos_0, pos_1 = players_pos
+                new_players_pos = [pos_0, pos_1]
+                new_players_pos[player] = (players_pos[player] + total_rolled - 1) % 10 + 1
+                scr_0, scr_1 = players_score
+                new_players_score = [scr_0, scr_1]
+                new_players_score[player] += players_pos[player]
+                new_num_of_universes = self.p[total_rolled] * num_of_universes
+
+                self.cache[cache_key] = self.dfs(new_players_score, new_players_pos, new_num_of_universes, player, dice_size, depth + 1)
+
+            ans = list(map(add, ans, self.cache[cache_key]))
+
+        return ans
 
     def calculate_number_of_universes(self, dice_size):
         players_pos = list(self.data)
         players_score = [0, 0]
         player = 0
         num_of_universes = 1
-        self.dfs(copy.deepcopy(players_score), copy.deepcopy(players_pos), num_of_universes, player, dice_size, 0)
+        ans = self.dfs(copy.deepcopy(players_score), copy.deepcopy(players_pos), num_of_universes, player, dice_size, 0)
         print(self.total_universes)
         print(self.universes)
+        print(ans)
+        return ans[0]
 
 
 def parse_day21_data():
