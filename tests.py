@@ -1082,8 +1082,8 @@ class Day21(unittest.TestCase):
         self.assertEqual(expected, roller.calculate_losing_score_x_num_of_rolls(dice_size))
 
     @parameterized.expand([
-        ("aoc example 1", (4, 8), 3, 444356092776315),
+        ("aoc example 1", (4, 8), 444356092776315),
     ])
-    def test_calculate_number_of_universes(self, _, players_pos, dice_size, expected):
+    def test_calculate_number_of_universes(self, _, players_pos, expected):
         roller = solutions.DiceRoller(players_pos)
-        self.assertEqual(expected, roller.calculate_number_of_universes(dice_size))
+        self.assertEqual(expected, roller.calculate_number_of_universes())
