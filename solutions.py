@@ -9,7 +9,8 @@ import time
 import heapq
 import copy
 import math
-from operator import add, mul
+from operator import add
+import re
 
 sys.setrecursionlimit(15000)
 
@@ -1849,3 +1850,65 @@ def day21_b():
     data = parse_day21_data()
     roller = DiceRoller(data)
     print("day21_b = {}".format(roller.calculate_number_of_universes()))
+
+
+class ReactorHandler:
+    def __init__(self, data):
+        self.data = data
+
+    def count_cubes_in_initialization_area(self):
+        area_x_min = area_y_min = area_z_min = -50
+        area_x_max = area_y_max = area_z_max = 51
+
+        area = set()
+
+        for d in self.data:
+            on, x_min, x_max, y_min, y_max, z_min, z_max = d
+            for x in range(max(x_min, area_x_min), min(x_max + 1, area_x_max)):
+                for y in range(max(y_min, area_y_min), min(y_max + 1, area_y_max)):
+                    for z in range(max(z_min, area_z_min), min(z_max + 1, area_z_max)):
+                        if on:
+                            area.add((x, y, z))
+                        else:
+                            area.discard((x, y, z))
+
+        return len(area)
+
+    def count_all_cubes(self):
+        area = set()
+
+        i = 0
+        for d in self.data:
+            on, x_min, x_max, y_min, y_max, z_min, z_max = d
+            print("{} / {}".format(i, len(self.data)))
+            i += 1
+            for x in range(x_min, x_max + 1):
+                for y in range(y_min, y_max + 1):
+                    for z in range(z_min, z_max + 1):
+                        if on:
+                            area.add((x, y, z))
+                        else:
+                            area.discard((x, y, z))
+
+        return len(area)
+
+
+def parse_day22_data():
+    data = []
+    with open("day22_a.txt", "r") as f:
+        for line in non_blank_lines(f):
+            tmp = line.split(" ")
+            data.append(tuple([tmp[0] == "on"]) + tuple(map(int, re.findall(r"-?\d+", tmp[1]))))
+    return data
+
+
+def day22_a():
+    data = parse_day22_data()
+    handler = ReactorHandler(data)
+    print("day22_a = {}".format(handler.count_cubes_in_initialization_area()))
+
+
+def day22_b():
+    data = parse_day22_data()
+    handler = ReactorHandler(data)
+    print("day22_b = {}".format(handler.count_all_cubes()))

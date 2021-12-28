@@ -1087,3 +1087,17 @@ class Day21(unittest.TestCase):
     def test_calculate_number_of_universes(self, _, players_pos, expected):
         roller = solutions.DiceRoller(players_pos)
         self.assertEqual(expected, roller.calculate_number_of_universes())
+
+
+class Day22(unittest.TestCase):
+    @parameterized.expand([
+        ("aoc example 1", [
+            (True, 10, 12, 10, 12, 10, 12),
+            (True, 11, 13, 11, 13, 11, 13),
+            (False, 9, 11, 9, 11, 9, 11),
+            (True, 10, 10, 10, 10, 10, 10),
+        ], 39),
+    ])
+    def test_count_cubes_in_initialization_area(self, _, data, expected):
+        handler = solutions.ReactorHandler(data)
+        self.assertEqual(expected, handler.count_cubes_in_initialization_area())
