@@ -11,6 +11,7 @@ import copy
 import math
 from operator import add
 import re
+from math import copysign
 
 sys.setrecursionlimit(15000)
 
@@ -2030,3 +2031,123 @@ def day22_b():
     data = parse_day22_data()
     handler = ReactorHandler(data)
     print("day22_b = {}".format(handler.count_all_cubes()))
+
+
+class AmphipodHandler:
+    def __init__(self, data):
+        self.data = data
+        self.board_squares = set()
+        for i in range(len(self.data)):
+            for j in range(len(self.data[i])):
+                if self.data[i][j] != 9:
+                    self.board_squares.add((i, j))
+
+        self.energy_req = {1: 1, 2: 10, 3: 100, 4: 1000}
+        self.lowest_energy = sys.maxsize
+
+    def game_over(self):
+        return self.data[2][3:10] == self.data[3][3:10] == [1, 9, 2, 9, 3, 9, 4]
+
+    def print(self):
+        for x in self.data:
+            print(x)
+        print("--------------------------------------------")
+
+    def path_free(self, start, end):
+        s_i, s_j = start
+        e_i, e_j = end
+        # print("{}".format(start))
+        path_len = 0
+        while s_i > 1:
+            s_i -= 1
+            path_len += 1
+            # print("{}, {}".format(s_i, s_j))
+            if self.data[s_i][s_j] != 0:
+                return False, None
+        # print("first phase")
+        step = int(math.copysign(1, e_j - s_j))
+        while s_j != e_j:
+            s_j += step
+            path_len += 1
+            # print("{}, {}".format(s_i, s_j))
+            if self.data[s_i][s_j] != 0:
+                return False, None
+
+        while s_i != e_i:
+            s_i += 1
+            path_len += 1
+            if self.data[s_i][s_j] != 0:
+                return False, None
+
+        return True, path_len
+
+    def possible_moves(self):
+        moves = set()
+
+        for i, j in self.board_squares:
+            if self.data[i][j] in [1, 2, 3, 4]:
+                target_j = self.data[i][j] * 2 + 1
+                if j == target_j and (i == 3 or i == 2 and self.data[i][j] == self.data[i + 1][j]):
+                    continue
+                if self.data[3][target_j] == 0:
+                    free, length = self.path_free((i, j), (3, target_j))
+                    if free:
+                        moves.add(((i, j), (3, target_j), length))
+
+                elif self.data[3][target_j] == self.data[i][j] and self.data[2][target_j] == 0:
+                    free, length = self.path_free((i, j), (2, target_j))
+                    if free:
+                        moves.add(((i, j), (2, target_j), length))
+                if i > 1:
+                    for h in [1, 2, 4, 6, 8, 10, 11]:
+                        free, length = self.path_free((i, j), (1, h))
+                        if free:
+                            moves.add(((i, j), (1, h), length))
+
+        return moves
+
+    def move(self, src, trgt):
+        src_i, src_j = src
+        trgt_i, trgt_j = trgt
+        self.data[trgt_i][trgt_j], self.data[src_i][src_j] = self.data[src_i][src_j], self.data[trgt_i][trgt_j]
+
+    def dfs(self, energy, depth):
+        if self.game_over():
+            self.lowest_energy = min(energy, self.lowest_energy)
+            # print(self.lowest_energy)
+            return 1
+
+        if energy >= self.lowest_energy:
+            # self.print()
+            # print(depth)
+            return 2
+
+        for m in self.possible_moves():
+            src, trgt, length = m
+            amph = self.data[src[0]][src[1]]
+            self.move(src, trgt)
+            k = self.dfs(energy + self.energy_req[amph] * length, depth + 1)
+            # if k == 2:
+            #     print(self.possible_moves())
+            self.move(trgt, src)
+
+        return 3
+
+    def organize_amphipods(self):
+        self.dfs(0, 0)
+        return self.lowest_energy
+
+
+def parse_day23_data():
+    mapping = {'A': 1, 'B': 2, 'C': 3, 'D': 4, '.': 0, ' ': 9, '#': 9}
+    with open("day23_a.txt", "r") as f:
+        data = [[mapping[x] for x in line] for line in non_blank_lines(f)]
+
+    return data
+
+
+def day23_a():
+    data = parse_day23_data()
+    print(data)
+    handler = AmphipodHandler(data)
+    print("day23_a = {}".format(handler.organize_amphipods()))
