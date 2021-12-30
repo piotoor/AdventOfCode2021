@@ -2034,16 +2034,69 @@ def day22_b():
 
 
 class AmphipodHandler:
+
     def __init__(self, data):
         self.data = data
         self.board_squares = set()
+        self.compute_board_squares()
+
+        self.energy_req = {1: 1, 2: 10, 3: 100, 4: 1000}
+        self.lowest_energy = sys.maxsize
+
+        self.distances = {}
+        self.compute_distances()
+
+        self.amphs = set()
+        self.find_amphs()
+
+        self.curr_solution = []
+        self.best_solution = []
+        self.cache = {}
+
+    def compute_board_squares(self):
         for i in range(len(self.data)):
             for j in range(len(self.data[i])):
                 if self.data[i][j] != 9:
                     self.board_squares.add((i, j))
 
-        self.energy_req = {1: 1, 2: 10, 3: 100, 4: 1000}
-        self.lowest_energy = sys.maxsize
+    class Amph:
+        def __init__(self, amph_id, pos):
+            self.amph_id = amph_id
+            self.pos = pos
+            self.target_j = amph_id * 2 + 1
+
+        def __key(self):
+            return (self.amph_id, self.pos)
+
+        def move(self, dst):
+            self.pos = dst
+
+        def __hash__(self):
+            return hash(self.__key())
+
+    def find_amphs(self):
+        for s in self.board_squares:
+            i, j = s
+            if self.data[i][j] != 0:
+                amph_id = self.data[i][j]
+                self.amphs.add(AmphipodHandler.Amph(amph_id, s))
+
+    def compute_distances(self):
+        for j_src in [1, 2, 4, 6, 8, 10, 11]:
+            for j_trgt in [3, 5, 7, 9]:
+                for i_trgt in range(2, 4):
+                    d = abs(i_trgt - 1) + abs(j_src - j_trgt)
+                    self.distances[((1, j_src), (i_trgt, j_trgt))] = d
+                    self.distances[((i_trgt, j_trgt), (1, j_src))] = d
+
+        for j_src in [3, 5, 7, 9]:
+            for i_src in range(2, 4):
+                for j_trgt in [3, 5, 7, 9]:
+                    if j_src == j_trgt:
+                        continue
+                    for i_trgt in range(2, 4):
+                        d = abs(i_trgt - 1) + abs(i_src - 1) + abs(j_src - j_trgt)
+                        self.distances[((i_src, j_src), (i_trgt, j_trgt))] = d
 
     def game_over(self):
         return self.data[2][3:10] == self.data[3][3:10] == [1, 9, 2, 9, 3, 9, 4]
@@ -2053,56 +2106,41 @@ class AmphipodHandler:
             print(x)
         print("--------------------------------------------")
 
-    def path_free(self, start, end):
-        s_i, s_j = start
-        e_i, e_j = end
-        # print("{}".format(start))
-        path_len = 0
-        while s_i > 1:
-            s_i -= 1
-            path_len += 1
-            # print("{}, {}".format(s_i, s_j))
-            if self.data[s_i][s_j] != 0:
-                return False, None
-        # print("first phase")
-        step = int(math.copysign(1, e_j - s_j))
-        while s_j != e_j:
-            s_j += step
-            path_len += 1
-            # print("{}, {}".format(s_i, s_j))
-            if self.data[s_i][s_j] != 0:
-                return False, None
+    def all_possible_moves(self):
+        ans = set()
+        for amph in self.amphs:
+            ans.update({(amph.pos, x) for x in self.possible_moves(amph)})
 
-        while s_i != e_i:
-            s_i += 1
-            path_len += 1
-            if self.data[s_i][s_j] != 0:
-                return False, None
+        return ans
 
-        return True, path_len
-
-    def possible_moves(self):
+    def possible_moves(self, amph):
         moves = set()
+        i, j = amph.pos
 
-        for i, j in self.board_squares:
-            if self.data[i][j] in [1, 2, 3, 4]:
-                target_j = self.data[i][j] * 2 + 1
-                if j == target_j and (i == 3 or i == 2 and self.data[i][j] == self.data[i + 1][j]):
-                    continue
-                if self.data[3][target_j] == 0:
-                    free, length = self.path_free((i, j), (3, target_j))
-                    if free:
-                        moves.add(((i, j), (3, target_j), length))
+        if i == 1 or j != amph.target_j and (i == 2 or i == 3 and self.data[2][j] == 0):
+            if self.data[3][amph.target_j] == 0:
+                cnt = 0
+                for a in range(min(j, amph.target_j), max(j, amph.target_j) + 1):
+                    if self.data[1][a] != 0 and a != j:
+                        cnt += 1
+                if cnt == 0:
+                    moves.add((3, amph.target_j))
+            elif self.data[3][amph.target_j] == amph.amph_id and self.data[2][amph.target_j] == 0:
+                cnt = 0
+                for a in range(min(j, amph.target_j), max(j, amph.target_j) + 1):
+                    if self.data[1][a] != 0 and a != j:
+                        cnt += 1
+                if cnt == 0:
+                    moves.add((2, amph.target_j))
 
-                elif self.data[3][target_j] == self.data[i][j] and self.data[2][target_j] == 0:
-                    free, length = self.path_free((i, j), (2, target_j))
-                    if free:
-                        moves.add(((i, j), (2, target_j), length))
-                if i > 1:
-                    for h in [1, 2, 4, 6, 8, 10, 11]:
-                        free, length = self.path_free((i, j), (1, h))
-                        if free:
-                            moves.add(((i, j), (1, h), length))
+        if (i == 2 and (j != amph.target_j or self.data[3][j] != amph.amph_id)) or (i == 3 and self.data[i][j] != (j - 1) // 2 and self.data[2][j] == 0):
+            for target_j in [1, 2, 4, 6, 8, 10, 11]:
+                cnt = 0
+                for a in range(min(j, target_j), max(j, target_j) + 1):
+                    if self.data[1][a] != 0:
+                        cnt += 1
+                if cnt == 0:
+                    moves.add((1, target_j))
 
         return moves
 
@@ -2113,29 +2151,32 @@ class AmphipodHandler:
 
     def dfs(self, energy, depth):
         if self.game_over():
-            self.lowest_energy = min(energy, self.lowest_energy)
-            # print(self.lowest_energy)
-            return 1
+            return energy
 
-        if energy >= self.lowest_energy:
-            # self.print()
-            # print(depth)
-            return 2
 
-        for m in self.possible_moves():
-            src, trgt, length = m
-            amph = self.data[src[0]][src[1]]
-            self.move(src, trgt)
-            k = self.dfs(energy + self.energy_req[amph] * length, depth + 1)
-            # if k == 2:
-            #     print(self.possible_moves())
-            self.move(trgt, src)
 
-        return 3
+        cache_key = "".join([str(x) for x in self.data])
+        if cache_key not in self.cache:
+            self.cache[cache_key] = sys.maxsize
+            for amph in self.amphs:
+                src = amph.pos
+                for m in self.possible_moves(amph):
+                    dst = m
+                    cost = self.energy_req[amph.amph_id] * self.distances[(src, dst)]
+                    self.move(src, dst)
+                    amph.move(dst)
+                    self.curr_solution.append((src, dst))
+                    curr = self.dfs(cost, depth + 1)
+                    self.cache[cache_key] = min(curr, self.cache[cache_key])
+                    self.curr_solution.pop()
+                    amph.move(src)
+                    self.move(dst, src)
+
+        return energy + self.cache[cache_key]
 
     def organize_amphipods(self):
-        self.dfs(0, 0)
-        return self.lowest_energy
+        ans = self.dfs(0, 0)
+        return ans
 
 
 def parse_day23_data():
