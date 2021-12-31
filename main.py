@@ -46,3 +46,4 @@ if __name__ == '__main__':
     # solutions.day22_a()
     # solutions.day22_b()
     solutions.day23_a()
+    solutions.day23_b()

@@ -2034,9 +2034,14 @@ def day22_b():
 
 
 class AmphipodHandler:
-
-    def __init__(self, data):
+    def __init__(self, data, large_rooms):
         self.data = data
+        self.large_rooms = large_rooms
+
+        self.room_size = 2
+        if large_rooms:
+            self.room_size *= 2
+
         self.board_squares = set()
         self.compute_board_squares()
 
@@ -2065,14 +2070,8 @@ class AmphipodHandler:
             self.pos = pos
             self.target_j = amph_id * 2 + 1
 
-        def __key(self):
-            return (self.amph_id, self.pos)
-
         def move(self, dst):
             self.pos = dst
-
-        def __hash__(self):
-            return hash(self.__key())
 
     def find_amphs(self):
         for s in self.board_squares:
@@ -2084,27 +2083,22 @@ class AmphipodHandler:
     def compute_distances(self):
         for j_src in [1, 2, 4, 6, 8, 10, 11]:
             for j_trgt in [3, 5, 7, 9]:
-                for i_trgt in range(2, 4):
+                for i_trgt in range(2, 2 + self.room_size):
                     d = abs(i_trgt - 1) + abs(j_src - j_trgt)
                     self.distances[((1, j_src), (i_trgt, j_trgt))] = d
                     self.distances[((i_trgt, j_trgt), (1, j_src))] = d
 
         for j_src in [3, 5, 7, 9]:
-            for i_src in range(2, 4):
+            for i_src in range(2, 2 + self.room_size):
                 for j_trgt in [3, 5, 7, 9]:
                     if j_src == j_trgt:
                         continue
-                    for i_trgt in range(2, 4):
+                    for i_trgt in range(2, 2 + self.room_size):
                         d = abs(i_trgt - 1) + abs(i_src - 1) + abs(j_src - j_trgt)
                         self.distances[((i_src, j_src), (i_trgt, j_trgt))] = d
 
     def game_over(self):
-        return self.data[2][3:10] == self.data[3][3:10] == [1, 9, 2, 9, 3, 9, 4]
-
-    def print(self):
-        for x in self.data:
-            print(x)
-        print("--------------------------------------------")
+        return all([self.data[i][3:10] == [1, 9, 2, 9, 3, 9, 4] for i in range(2, 2 + self.room_size)])
 
     def all_possible_moves(self):
         ans = set()
@@ -2117,23 +2111,20 @@ class AmphipodHandler:
         moves = set()
         i, j = amph.pos
 
-        if i == 1 or j != amph.target_j and (i == 2 or i == 3 and self.data[2][j] == 0):
-            if self.data[3][amph.target_j] == 0:
-                cnt = 0
-                for a in range(min(j, amph.target_j), max(j, amph.target_j) + 1):
-                    if self.data[1][a] != 0 and a != j:
-                        cnt += 1
-                if cnt == 0:
-                    moves.add((3, amph.target_j))
-            elif self.data[3][amph.target_j] == amph.amph_id and self.data[2][amph.target_j] == 0:
-                cnt = 0
-                for a in range(min(j, amph.target_j), max(j, amph.target_j) + 1):
-                    if self.data[1][a] != 0 and a != j:
-                        cnt += 1
-                if cnt == 0:
-                    moves.add((2, amph.target_j))
+        if i == 1:
+            cnt = 0
+            for a in range(min(j, amph.target_j), max(j, amph.target_j) + 1):
+                if self.data[1][a] != 0 and a != j:
+                    cnt += 1
+            if cnt == 0:
+                for target_i in range(2, 2 + self.room_size):
+                    if self.data[target_i][amph.target_j] == 0 and all(
+                            [self.data[target_i + k][amph.target_j] == amph.amph_id for k in
+                             range(1, self.room_size - target_i + 2)]):
+                        moves.add((target_i, amph.target_j))
+                        break
 
-        if (i == 2 and (j != amph.target_j or self.data[3][j] != amph.amph_id)) or (i == 3 and self.data[i][j] != (j - 1) // 2 and self.data[2][j] == 0):
+        if self.data[i - 1][j] == 0 and any([self.data[i + k][j] != (j - 1) // 2 for k in range(self.room_size - i + 2)]):
             for target_j in [1, 2, 4, 6, 8, 10, 11]:
                 cnt = 0
                 for a in range(min(j, target_j), max(j, target_j) + 1):
@@ -2141,6 +2132,19 @@ class AmphipodHandler:
                         cnt += 1
                 if cnt == 0:
                     moves.add((1, target_j))
+
+            for target_j in [3, 5, 7, 9]:
+                if amph.target_j != target_j:
+                    continue
+                cnt = 0
+                for a in range(min(j, target_j), max(j, target_j) + 1):
+                    if self.data[1][a] != 0:
+                        cnt += 1
+                if cnt == 0:
+                    for target_i in range(2, 2 + self.room_size):
+                        if self.data[target_i][target_j] == 0 and all([self.data[target_i + k][target_j] == (target_j - 1) // 2 for k in range(1, self.room_size - target_i + 2)]):
+                            moves.add((target_i, target_j))
+                            break
 
         return moves
 
@@ -2152,8 +2156,6 @@ class AmphipodHandler:
     def dfs(self, energy, depth):
         if self.game_over():
             return energy
-
-
 
         cache_key = "".join([str(x) for x in self.data])
         if cache_key not in self.cache:
@@ -2179,7 +2181,7 @@ class AmphipodHandler:
         return ans
 
 
-def parse_day23_data():
+def parse_day23a_data():
     mapping = {'A': 1, 'B': 2, 'C': 3, 'D': 4, '.': 0, ' ': 9, '#': 9}
     with open("day23_a.txt", "r") as f:
         data = [[mapping[x] for x in line] for line in non_blank_lines(f)]
@@ -2188,7 +2190,22 @@ def parse_day23_data():
 
 
 def day23_a():
-    data = parse_day23_data()
-    print(data)
-    handler = AmphipodHandler(data)
+    data = parse_day23a_data()
+    handler = AmphipodHandler(data, large_rooms=False)
     print("day23_a = {}".format(handler.organize_amphipods()))
+
+
+def parse_day23b_data():
+    mapping = {'A': 1, 'B': 2, 'C': 3, 'D': 4, '.': 0, ' ': 9, '#': 9}
+    with open("day23_a.txt", "r") as f:
+        data = [[mapping[x] for x in line] for line in non_blank_lines(f)]
+
+    data = data[0:3] + [[9, 9, 9, 4, 9, 3, 9, 2, 9, 1, 9, 9, 9], [9, 9, 9, 4, 9, 2, 9, 1, 9, 3, 9, 9, 9]] + data[3:]
+
+    return data
+
+
+def day23_b():
+    data = parse_day23b_data()
+    handler = AmphipodHandler(data, large_rooms=True)
+    print("day23_b = {}".format(handler.organize_amphipods()))
