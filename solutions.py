@@ -43,7 +43,7 @@ def count_number_of_increased_windows(data):
 
 
 def parse_day1_data():
-    with open("day1a.txt", "r") as f:
+    with open("day1.txt", "r") as f:
         data = list(map(int, f.read().splitlines()))
 
     return data
@@ -75,7 +75,7 @@ def calculate_hrz_depth_product(data):
 
 
 def parse_day2_data():
-    with open("day2a.txt", "r") as f:
+    with open("day2.txt", "r") as f:
         data = [tuple(cmd.split()) for cmd in f.read().splitlines()]
 
     return data
@@ -122,7 +122,7 @@ def calculate_power_consumption(data):
 
 
 def parse_day3_data():
-    with open("day3a.txt", "r") as f:
+    with open("day3.txt", "r") as f:
         data = list(f.read().splitlines())
 
     return data
@@ -262,7 +262,7 @@ def non_blank_lines(f):
 
 def parse_day4_data():
     raw_data = []
-    with open("day4_a.txt", "r") as f:
+    with open("day4.txt", "r") as f:
         numbers = list(map(int, f.readline().split(",")))
         for line in non_blank_lines(f):
             raw_data.append(list(map(int, line.split())))
@@ -299,7 +299,7 @@ def day4_b():
 
 
 def parse_day5_data():
-    with open("day5_a.txt", "r") as f:
+    with open("day5.txt", "r") as f:
         data = [line.split(" -> ") for line in non_blank_lines(f)]
 
     data = [tuple(map(int, (x[0] + "," + x[1]).split(","))) for x in data]
@@ -384,7 +384,7 @@ def day5_b():
 
 
 def parse_day6_data():
-    with open("day6_a.txt", "r") as f:
+    with open("day6.txt", "r") as f:
         data = list(map(int, f.readline().split(",")))
 
     return data
@@ -434,7 +434,7 @@ def day6_b():
 
 
 def parse_day7_data():
-    with open("day7_a.txt", "r") as f:
+    with open("day7.txt", "r") as f:
         data = list(map(int, f.readline().split(",")))
 
     return data
@@ -468,7 +468,7 @@ def day7_b():
 
 
 def parse_day8_data():
-    with open("day8_a.txt", "r") as f:
+    with open("day8.txt", "r") as f:
         data = [[x.split() for x in line.split(" | ")] for line in non_blank_lines(f)]
 
     return data
@@ -565,7 +565,7 @@ def day8_b():
 
 
 def parse_day9_data():
-    with open("day9_a.txt", "r") as f:
+    with open("day9.txt", "r") as f:
         data = [list(map(int, list(line))) for line in non_blank_lines(f)]
 
     return data
@@ -730,7 +730,7 @@ class ParenthesisParser:
 
 
 def parse_day10_data():
-    with open("day10_a.txt", "r") as f:
+    with open("day10.txt", "r") as f:
         data = [line for line in non_blank_lines(f)]
 
     return data
@@ -751,7 +751,7 @@ def day10_b():
 
 
 def parse_day11_data():
-    with open("day11_a.txt", "r") as f:
+    with open("day11.txt", "r") as f:
         data = [list(map(int, list(line))) for line in non_blank_lines(f)]
 
     return data
@@ -895,7 +895,7 @@ class Pathfinder:
 
 
 def parse_day12_data():
-    with open("day12_a.txt", "r") as f:
+    with open("day12.txt", "r") as f:
         data = [tuple(line.split("-")) for line in non_blank_lines(f)]
 
     return data
@@ -916,7 +916,7 @@ def day12_b():
 def parse_day13_data():
     dots = set()
     instructions = []
-    with open("day13_a.txt", "r") as f:
+    with open("day13.txt", "r") as f:
         for line in non_blank_lines(f):
             if line[0] == 'f':
                 fold_axis = line.split(" ")[2].split("=")
@@ -1010,7 +1010,7 @@ def day13_b():
 def parse_day14_data():
     data = []
 
-    with open("day14_a.txt", "r") as f:
+    with open("day14.txt", "r") as f:
         data.append(f.readline().rstrip())
         for line in non_blank_lines(f):
             data.append(tuple(line.split(" -> ")))
@@ -1167,7 +1167,7 @@ class WeightedPathfinder:
 
 
 def parse_day15_data():
-    with open("day15_a.txt", "r") as f:
+    with open("day15.txt", "r") as f:
         data = [list(map(int, list(line))) for line in non_blank_lines(f)]
 
     return data
@@ -1266,7 +1266,7 @@ class TransmissionHandler:
 
 
 def parse_day16_data():
-    with open("day16_a.txt", "r") as f:
+    with open("day16.txt", "r") as f:
         data = f.readline()
     return data
 
@@ -1285,7 +1285,7 @@ def day16_b():
 
 def parse_day17_data():
     data = []
-    with open("day17_a.txt", "r") as f:
+    with open("day17.txt", "r") as f:
         line = f.readline()[13:].split(", ")
         for coords in line:
             data.extend((coords[2:].split("..")))
@@ -1473,7 +1473,7 @@ class SnailfishCalculator:
 
 
 def parse_day18_data():
-    with open("day18_a.txt", "r") as f:
+    with open("day18.txt", "r") as f:
         raw_data = [line for line in non_blank_lines(f)]
 
     ans = []
@@ -1677,7 +1677,7 @@ BeaconHandler.rotations_table = [
 
 
 def parse_day19_data():
-    with open("day19_a.txt", "r") as f:
+    with open("day19.txt", "r") as f:
         data = []
         for line in non_blank_lines(f):
             if line[0:3] == '---':
@@ -1754,7 +1754,7 @@ class ImageEnhancer:
 
 
 def parse_day20_data():
-    with open("day20_a.txt", "r") as f:
+    with open("day20.txt", "r") as f:
         data = [line for line in non_blank_lines(f)]
 
     alg = data[0]
@@ -1834,7 +1834,7 @@ class DiceRoller:
 
 
 def parse_day21_data():
-    with open("day21_a.txt", "r") as f:
+    with open("day21.txt", "r") as f:
         data = [int(line.split(" ")[-1]) for line in non_blank_lines(f)]
 
     return data
@@ -2014,7 +2014,7 @@ class ReactorHandler:
 
 def parse_day22_data():
     data = []
-    with open("day22_a.txt", "r") as f:
+    with open("day22.txt", "r") as f:
         for line in non_blank_lines(f):
             tmp = line.split(" ")
             data.append(tuple([tmp[0] == "on"]) + tuple(map(int, re.findall(r"-?\d+", tmp[1]))))
@@ -2183,7 +2183,7 @@ class AmphipodHandler:
 
 def parse_day23a_data():
     mapping = {'A': 1, 'B': 2, 'C': 3, 'D': 4, '.': 0, ' ': 9, '#': 9}
-    with open("day23_a.txt", "r") as f:
+    with open("day23.txt", "r") as f:
         data = [[mapping[x] for x in line] for line in non_blank_lines(f)]
 
     return data
@@ -2197,7 +2197,7 @@ def day23_a():
 
 def parse_day23b_data():
     mapping = {'A': 1, 'B': 2, 'C': 3, 'D': 4, '.': 0, ' ': 9, '#': 9}
-    with open("day23_a.txt", "r") as f:
+    with open("day23.txt", "r") as f:
         data = [[mapping[x] for x in line] for line in non_blank_lines(f)]
 
     data = data[0:3] + [[9, 9, 9, 4, 9, 3, 9, 2, 9, 1, 9, 9, 9], [9, 9, 9, 4, 9, 2, 9, 1, 9, 3, 9, 9, 9]] + data[3:]
@@ -2392,7 +2392,7 @@ class AssemblyHandler:
 
 
 def parse_day24_data():
-    with open("day24_a.txt", "r") as f:
+    with open("day24.txt", "r") as f:
         return [(line.split()[0], " ".join(line.split()[1:])) for line in non_blank_lines(f)]
 
 
@@ -2458,7 +2458,7 @@ class CucumberHandler:
 
 
 def parse_day25_data():
-    with open("day25_a.txt", "r") as f:
+    with open("day25.txt", "r") as f:
         data = [list(line) for line in non_blank_lines(f)]
     return data
 
