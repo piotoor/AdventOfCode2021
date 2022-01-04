@@ -36,6 +36,7 @@ class Day2(unittest.TestCase):
             ("down", "8"),
             ("forward", "2")
         ], 150),
+        ("example 2 puzzle data", day2.parse_day2_data(), 1924923),
     ])
     def test_calculate_hrz_depth_product(self, _, data, expected):
         self.assertEqual(expected, day2.calculate_hrz_depth_product(data))
@@ -49,6 +50,7 @@ class Day2(unittest.TestCase):
             ("down", "8"),
             ("forward", "2")
         ], 900),
+        ("example 2 puzzle data", day2.parse_day2_data(), 1982495697),
     ])
     def test_calculate_hrz_depth_aim_product(self, _, data, expected):
         self.assertEqual(expected, day2.calculate_hrz_depth_aim_product(data))
