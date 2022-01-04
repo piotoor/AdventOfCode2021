@@ -1,5 +1,6 @@
 import solutions
 import day1
+import day2
 import unittest
 from parameterized import parameterized
 
@@ -34,7 +35,7 @@ class Day2(unittest.TestCase):
                 ("down", "8"),
                 ("forward", "2")]
         expected = 150
-        self.assertEqual(expected, solutions.calculate_hrz_depth_product(data))
+        self.assertEqual(expected, day2.calculate_hrz_depth_product(data))
 
     def test_calculate_hrz_depth_aim_product(self):
         data = [("forward", "5"),
@@ -44,7 +45,7 @@ class Day2(unittest.TestCase):
                 ("down", "8"),
                 ("forward", "2")]
         expected = 900
-        self.assertEqual(expected, solutions.calculate_hrz_depth_aim_product(data))
+        self.assertEqual(expected, day2.calculate_hrz_depth_aim_product(data))
 
 
 class Day3(unittest.TestCase):
