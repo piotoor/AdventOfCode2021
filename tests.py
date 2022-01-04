@@ -73,6 +73,7 @@ class Day3(unittest.TestCase):
              '00010',
              '01010'
         ], 198),
+        ("example 2 puzzle data", day3.parse_day3_data(), 4139586),
     ])
     def test_calculate_power_consumption(self, _, data, expected):
         self.assertEqual(expected, day3.calculate_power_consumption(data))
@@ -92,6 +93,7 @@ class Day3(unittest.TestCase):
              '00010',
              '01010'
         ], 230),
+        ("example 2 puzzle data", day3.parse_day3_data(), 1800151),
     ])
     def test_calculate_life_support_rating(self, _, data, expected):
         self.assertEqual(expected, day3.calculate_life_support_rating(data))
