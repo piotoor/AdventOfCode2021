@@ -1,8 +1,8 @@
 import solutions
 
 if __name__ == '__main__':
-    # solutions.day1_a()
-    # solutions.day1_b()
+    # day1.solutions.day1_a()
+    # day1.solutions.day1_b()
     # solutions.day2_a()
     # solutions.day2_b()
     # solutions.day3_a()
