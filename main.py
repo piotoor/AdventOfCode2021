@@ -47,5 +47,6 @@ if __name__ == '__main__':
     # solutions.day22_b()
     # solutions.day23_a()
     # solutions.day23_b()
-    solutions.day24_a()
-    solutions.day24_b()
+    # solutions.day24_a()
+    # solutions.day24_b()
+    solutions.day25_a()
