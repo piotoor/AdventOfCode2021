@@ -5,37 +5,21 @@ from parameterized import parameterized
 
 
 class Day1(unittest.TestCase):
-    def test_count_number_of_increases_empty(self):
-        data = []
-        expected = 0
+    @parameterized.expand([
+        ("example 1", [], 0),
+        ("example 2", [199, 200, 208, 210, 200, 207, 240, 269, 260, 263], 7),
+    ])
+    def test_count_number_of_increases(self, _, data, expected):
         self.assertEqual(expected, day1.count_number_of_increases(data))
 
-    def test_count_number_of_increases(self):
-        data = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
-        expected = 7
-        self.assertEqual(expected, day1.count_number_of_increases(data))
-
-    def test_count_number_of_increased_windows_empty(self):
-        data = []
-        expected = 0
-        self.assertEqual(expected, day1.count_number_of_increased_windows(data))
-
-    def test_count_number_of_increased_windows_up_to_3_elements(self):
-        data = [1]
-        expected = 0
-        self.assertEqual(expected, day1.count_number_of_increased_windows(data))
-
-        data = [1, 10]
-        expected = 0
-        self.assertEqual(expected, day1.count_number_of_increased_windows(data))
-
-        data = [1, 10, 100]
-        expected = 0
-        self.assertEqual(expected, day1.count_number_of_increased_windows(data))
-
-    def test_count_number_of_increased_windows(self):
-        data = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
-        expected = 5
+    @parameterized.expand([
+        ("example 1", [], 0),
+        ("example 2", [1], 0),
+        ("example 3", [1, 10], 0),
+        ("example 4", [1, 10, 100], 0),
+        ("example 5", [199, 200, 208, 210, 200, 207, 240, 269, 260, 263], 5),
+    ])
+    def test_count_number_of_increased_windows(self, _, data, expected):
         self.assertEqual(expected, day1.count_number_of_increased_windows(data))
 
 
