@@ -1,6 +1,7 @@
 import solutions
 import day1
 import day2
+import day3
 import unittest
 from parameterized import parameterized
 
@@ -73,19 +74,19 @@ class Day3(unittest.TestCase):
 
     def test_calculate_power_consumption(self):
         expected = 198
-        self.assertEqual(expected, solutions.calculate_power_consumption(self.data))
+        self.assertEqual(expected, day3.calculate_power_consumption(self.data))
 
     def test_calculate_oxygen_generator_rating(self):
         expected = 23
-        self.assertEqual(expected, solutions.calculate_oxygen_generator_rating(self.data))
+        self.assertEqual(expected, day3.calculate_oxygen_generator_rating(self.data))
 
     def test_calculate_co2_scrubber_rating(self):
         expected = 10
-        self.assertEqual(expected, solutions.calculate_co2_scrubber_rating(self.data))
+        self.assertEqual(expected, day3.calculate_co2_scrubber_rating(self.data))
 
     def test_calculate_life_support_rating(self):
         expected = 230
-        self.assertEqual(expected, solutions.calculate_life_support_rating(self.data))
+        self.assertEqual(expected, day3.calculate_life_support_rating(self.data))
 
 
 class Day4(unittest.TestCase):
