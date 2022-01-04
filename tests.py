@@ -27,24 +27,30 @@ class Day1(unittest.TestCase):
 
 
 class Day2(unittest.TestCase):
-    def test_calculate_hrz_depth_product(self):
-        data = [("forward", "5"),
-                ("down", "5"),
-                ("forward", "8"),
-                ("up", "3"),
-                ("down", "8"),
-                ("forward", "2")]
-        expected = 150
+    @parameterized.expand([
+        ("example 1", [
+            ("forward", "5"),
+            ("down", "5"),
+            ("forward", "8"),
+            ("up", "3"),
+            ("down", "8"),
+            ("forward", "2")
+        ], 150),
+    ])
+    def test_calculate_hrz_depth_product(self, _, data, expected):
         self.assertEqual(expected, day2.calculate_hrz_depth_product(data))
 
-    def test_calculate_hrz_depth_aim_product(self):
-        data = [("forward", "5"),
-                ("down", "5"),
-                ("forward", "8"),
-                ("up", "3"),
-                ("down", "8"),
-                ("forward", "2")]
-        expected = 900
+    @parameterized.expand([
+        ("example 1", [
+            ("forward", "5"),
+            ("down", "5"),
+            ("forward", "8"),
+            ("up", "3"),
+            ("down", "8"),
+            ("forward", "2")
+        ], 900),
+    ])
+    def test_calculate_hrz_depth_aim_product(self, _, data, expected):
         self.assertEqual(expected, day2.calculate_hrz_depth_aim_product(data))
 
 
