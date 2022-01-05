@@ -162,8 +162,8 @@ class Day4(unittest.TestCase):
 
 
 class Day5(unittest.TestCase):
-    def setUp(self):
-        self.data = [
+    @parameterized.expand([
+        ("example 1", [
             (0, 9, 5, 9),
             (8, 0, 0, 8),
             (9, 4, 3, 4),
@@ -174,15 +174,27 @@ class Day5(unittest.TestCase):
             (3, 4, 1, 4),
             (0, 0, 8, 8),
             (5, 5, 8, 2)
-        ]
+        ], 5),
+    ])
+    def test_count_overlapping_horizontal_vertical(self, _, data, expected):
+        self.assertEqual(expected, day5.count_overlapping_horizontal_vertical(data))
 
-    def test_count_overlapping_horizontal_vertical(self):
-        expected = 5
-        self.assertEqual(expected, day5.count_overlapping_horizontal_vertical(self.data))
-
-    def test_count_overlapping_horizontal_vertical_diagonal(self):
-        expected = 12
-        self.assertEqual(expected, day5.count_overlapping_horizontal_vertical_diagonal(self.data))
+    @parameterized.expand([
+        ("example 1", [
+            (0, 9, 5, 9),
+            (8, 0, 0, 8),
+            (9, 4, 3, 4),
+            (2, 2, 2, 1),
+            (7, 0, 7, 4),
+            (6, 4, 2, 0),
+            (0, 9, 2, 9),
+            (3, 4, 1, 4),
+            (0, 0, 8, 8),
+            (5, 5, 8, 2)
+        ], 12),
+    ])
+    def test_count_overlapping_horizontal_vertical_diagonal(self, _, data, expected):
+        self.assertEqual(expected, day5.count_overlapping_horizontal_vertical_diagonal(data))
 
 
 class Day6(unittest.TestCase):
