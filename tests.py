@@ -3,6 +3,7 @@ import day1
 import day2
 import day3
 import day4
+import day5
 import unittest
 from parameterized import parameterized
 
@@ -177,11 +178,11 @@ class Day5(unittest.TestCase):
 
     def test_count_overlapping_horizontal_vertical(self):
         expected = 5
-        self.assertEqual(expected, solutions.count_overlapping_horizontal_vertical(self.data))
+        self.assertEqual(expected, day5.count_overlapping_horizontal_vertical(self.data))
 
     def test_count_overlapping_horizontal_vertical_diagonal(self):
         expected = 12
-        self.assertEqual(expected, solutions.count_overlapping_horizontal_vertical_diagonal(self.data))
+        self.assertEqual(expected, day5.count_overlapping_horizontal_vertical_diagonal(self.data))
 
 
 class Day6(unittest.TestCase):
