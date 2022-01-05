@@ -175,6 +175,7 @@ class Day5(unittest.TestCase):
             (0, 0, 8, 8),
             (5, 5, 8, 2)
         ], 5),
+        ("example 2 puzzle data", day5.parse_day5_data(), 7142),
     ])
     def test_count_overlapping_horizontal_vertical(self, _, data, expected):
         self.assertEqual(expected, day5.count_overlapping_horizontal_vertical(data))
@@ -192,6 +193,7 @@ class Day5(unittest.TestCase):
             (0, 0, 8, 8),
             (5, 5, 8, 2)
         ], 12),
+        ("example 2 puzzle data", day5.parse_day5_data(), 20012),
     ])
     def test_count_overlapping_horizontal_vertical_diagonal(self, _, data, expected):
         self.assertEqual(expected, day5.count_overlapping_horizontal_vertical_diagonal(data))
