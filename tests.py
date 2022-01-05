@@ -121,6 +121,7 @@ class Day4(unittest.TestCase):
              [22, 11, 13, 6, 5],
              [2, 0, 12, 3, 7]]
         ], [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1], 4512),
+        ("example 2 puzzle data", day4.parse_day4_data()[0], day4.parse_day4_data()[1], 89001),
     ])
     def test_get_first_winner_points(self, _, boards, nums, expected):
         bingo = day4.Bingo(boards, nums)
@@ -149,6 +150,7 @@ class Day4(unittest.TestCase):
              [22, 11, 13, 6, 5],
              [2, 0, 12, 3, 7]]
         ], [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1], 1924),
+        ("example 2 puzzle data", day4.parse_day4_data()[0], day4.parse_day4_data()[1], 7296),
     ])
     def test_get_last_winner_points(self, _, boards, nums, expected):
         bingo = day4.AntiBingo(boards, nums)
