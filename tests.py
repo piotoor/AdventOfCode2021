@@ -2,6 +2,7 @@ import solutions
 import day1
 import day2
 import day3
+import day4
 import unittest
 from parameterized import parameterized
 
@@ -124,7 +125,7 @@ class Day4(unittest.TestCase):
         self.nums = [7, 4, 9, 5, 11, 17, 23, 2, 0, 14, 21, 24, 10, 16, 13, 6, 15, 25, 12, 22, 18, 20, 8, 19, 3, 26, 1]
 
     def test_get_first_winner_points(self):
-        bingo = solutions.Bingo(self.boards, self.nums)
+        bingo = day4.Bingo(self.boards, self.nums)
         expected_winner_board_points = 4512
 
         while bingo.is_move_possible():
@@ -133,7 +134,7 @@ class Day4(unittest.TestCase):
         self.assertEqual(expected_winner_board_points, bingo.get_winner_points())
 
     def test_get_last_winner_points(self):
-        bingo = solutions.AntiBingo(self.boards, self.nums)
+        bingo = day4.AntiBingo(self.boards, self.nums)
         expected_winner_board_points = 1924
 
         while bingo.is_move_possible():
