@@ -10,6 +10,7 @@ import day8
 import day9
 import day10
 import day11
+import day12
 import unittest
 from parameterized import parameterized
 
@@ -455,7 +456,7 @@ class Day12(unittest.TestCase):
         ], 226)
     ])
     def test_count_paths_visiting_all_small_caves_once(self, _, data, expected):
-        pf = solutions.Pathfinder(data)
+        pf = day12.Pathfinder(data)
         self.assertEqual(expected, pf.count_paths_visiting_all_small_caves_once())
 
     @parameterized.expand([
@@ -502,7 +503,7 @@ class Day12(unittest.TestCase):
         ], 3509)
     ])
     def test_count_paths_visiting_all_small_caves_but_one_once(self, _, data, expected):
-        pf = solutions.Pathfinder(data)
+        pf = day12.Pathfinder(data)
         self.assertEqual(expected, pf.count_paths_visiting_all_small_caves_but_one_once())
 
 
