@@ -203,6 +203,8 @@ class Day5(unittest.TestCase):
 class Day6(unittest.TestCase):
     @parameterized.expand([
         ("example 1", [3, 4, 3, 1, 2], 80, 5934),
+        ("example 2 puzzle part 1 data", day6.parse_day6_data(), 80, 358214),
+        ("example 3 puzzle part 2 data", day6.parse_day6_data(), 256, 1622533344325),
     ])
     def test_count_lanternfish(self, _, data, days, expected):
         self.assertEqual(expected, day6.count_lanternfish(data, days))
