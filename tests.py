@@ -213,8 +213,8 @@ class Day6(unittest.TestCase):
 
 class Day7(unittest.TestCase):
     @parameterized.expand([
-        ("const fuel usage", [16, 1, 2, 0, 4, 2, 7, 1, 2, 14], 37, lambda x: x),
-        ("increasing fuel usage", [16, 1, 2, 0, 4, 2, 7, 1, 2, 14], 168, lambda x: int(0.5 * x * (x + 1))),
+        ("example 1 const fuel usage", [16, 1, 2, 0, 4, 2, 7, 1, 2, 14], 37, lambda x: x),
+        ("example 2 increasing fuel usage", [16, 1, 2, 0, 4, 2, 7, 1, 2, 14], 168, lambda x: int(0.5 * x * (x + 1))),
     ])
     def test_find_optimal_fuel_usage(self, _, data, expected, increase):
         self.assertEqual(expected, day7.find_optimal_fuel_usage(data, increase))
