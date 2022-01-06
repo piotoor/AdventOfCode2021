@@ -5,6 +5,7 @@ import day3
 import day4
 import day5
 import day6
+import day7
 import unittest
 from parameterized import parameterized
 
@@ -216,7 +217,7 @@ class Day7(unittest.TestCase):
         ("increasing fuel usage", [16, 1, 2, 0, 4, 2, 7, 1, 2, 14], 168, lambda x: int(0.5 * x * (x + 1))),
     ])
     def test_find_optimal_fuel_usage(self, _, data, expected, increase):
-        self.assertEqual(expected, solutions.find_optimal_fuel_usage(data, increase))
+        self.assertEqual(expected, day7.find_optimal_fuel_usage(data, increase))
 
 
 class Day8(unittest.TestCase):
