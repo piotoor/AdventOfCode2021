@@ -6,6 +6,7 @@ import day4
 import day5
 import day6
 import day7
+import day8
 import unittest
 from parameterized import parameterized
 
@@ -241,11 +242,11 @@ class Day8(unittest.TestCase):
 
     def test_count_digits_made_of_unique_number_of_segments(self):
         expected = 26
-        self.assertEqual(expected, solutions.count_digits_made_of_unique_number_of_segments(self.data))
+        self.assertEqual(expected, day8.count_digits_made_of_unique_number_of_segments(self.data))
 
     def test_calculate_sum_of_all_output_digits(self):
         expected = 61229
-        self.assertEqual(expected, solutions.calculate_sum_of_all_output_digits(self.data))
+        self.assertEqual(expected, day8.calculate_sum_of_all_output_digits(self.data))
 
 
 class Day9(unittest.TestCase):
