@@ -9,6 +9,7 @@ import day7
 import day8
 import day9
 import day10
+import day11
 import unittest
 from parameterized import parameterized
 
@@ -394,7 +395,7 @@ class Day11(unittest.TestCase):
         ], 2, 9)
     ])
     def test_count_number_of_flashes(self, _, data, steps, expected):
-        handler = solutions.OctopusEngeryHandler(data)
+        handler = day11.OctopusEngeryHandler(data)
         self.assertEqual(expected, handler.count_number_of_flashes(steps))
 
     @parameterized.expand([
@@ -412,7 +413,7 @@ class Day11(unittest.TestCase):
         ], 195),
     ])
     def test_count_number_of_flashes(self, _, data, expected):
-        handler = solutions.OctopusEngeryHandler(data)
+        handler = day11.OctopusEngeryHandler(data)
         self.assertEqual(expected, handler.count_steps_to_simultaneous_flash())
 
 
