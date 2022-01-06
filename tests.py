@@ -394,7 +394,8 @@ class Day11(unittest.TestCase):
             [1, 9, 1, 9, 1],
             [1, 9, 9, 9, 1],
             [1, 1, 1, 1, 1],
-        ], 2, 9)
+        ], 2, 9),
+        ("puzzle data", day11.parse_day11_data(), 100, 1679)
     ])
     def test_count_number_of_flashes(self, _, data, steps, expected):
         handler = day11.OctopusEngeryHandler(data)
@@ -402,6 +403,7 @@ class Day11(unittest.TestCase):
 
     @parameterized.expand([
         ("aoc example 1", data, 195),
+        ("puzzle data", day11.parse_day11_data(), 519)
     ])
     def test_count_steps_to_simultaneous_flash(self, _, data, expected):
         handler = day11.OctopusEngeryHandler(data)
