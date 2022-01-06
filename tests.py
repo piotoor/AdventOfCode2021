@@ -311,6 +311,7 @@ class Day10(unittest.TestCase):
             "<{([([[(<>()){}]>(<<{{"
             "<{([{{}}[<[[[<>{}]]]>[]]"
         ], 26397),
+        ("puzzle data", day10.parse_day10_data(), 390993)
     ])
     def test_calculate_syntax_error_score(self, _, data, expected):
         parser = day10.ParenthesisParser(data)
@@ -363,6 +364,7 @@ class Day10(unittest.TestCase):
             "<{([([[(<>()){}]>(<<{{",
             "<{([{{}}[<[[[<>{}]]]>[]]"
         ], 288957),
+        ("puzzle data", day10.parse_day10_data(), 2391385187)
     ])
     def test_calculate_autocomplete_score(self, _, data, expected):
         parser = day10.ParenthesisParser(data)
