@@ -240,12 +240,16 @@ class Day8(unittest.TestCase):
 
         self.data = [[x.split() for x in line.split(" | ")] for line in self.raw_data]
 
-    def test_count_digits_made_of_unique_number_of_segments(self):
-        expected = 26
+    @parameterized.expand([
+        ("example 1", 26),
+    ])
+    def test_count_digits_made_of_unique_number_of_segments(self, _, expected):
         self.assertEqual(expected, day8.count_digits_made_of_unique_number_of_segments(self.data))
 
-    def test_calculate_sum_of_all_output_digits(self):
-        expected = 61229
+    @parameterized.expand([
+        ("example 1", 61229),
+    ])
+    def test_calculate_sum_of_all_output_digits(self, _, expected):
         self.assertEqual(expected, day8.calculate_sum_of_all_output_digits(self.data))
 
 
