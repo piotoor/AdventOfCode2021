@@ -224,8 +224,7 @@ class Day7(unittest.TestCase):
 
 
 class Day8(unittest.TestCase):
-    def setUp(self):
-        self.raw_data = [
+    raw_data = [
             "be cfbegad cbdgef fgaecd cgeb fdcge agebfd fecdb fabcd edb | fdgacbe cefdb cefbgd gcbe",
             "edbfga begcd cbg gc gcadebf fbgde acbgfd abcde gfcbed gfec | fcgedb cgb dgebacf gc",
             "fgaebd cg bdaec gdafb agbcfd gdcbef bgcad gfac gcb cdgabef | cg cg fdcagb cbg",
@@ -238,19 +237,19 @@ class Day8(unittest.TestCase):
             "gcafb gcf dcaebfg ecagb gf abcdeg gaef cafbge fdbac fegbdc | fgae cfgab fg bagce"
         ]
 
-        self.data = [[x.split() for x in line.split(" | ")] for line in self.raw_data]
+    @parameterized.expand([
+        ("example 1", raw_data, 26),
+    ])
+    def test_count_digits_made_of_unique_number_of_segments(self, _, raw_data, expected):
+        data = [[x.split() for x in line.split(" | ")] for line in raw_data]
+        self.assertEqual(expected, day8.count_digits_made_of_unique_number_of_segments(data))
 
     @parameterized.expand([
-        ("example 1", 26),
+        ("example 1", raw_data, 61229),
     ])
-    def test_count_digits_made_of_unique_number_of_segments(self, _, expected):
-        self.assertEqual(expected, day8.count_digits_made_of_unique_number_of_segments(self.data))
-
-    @parameterized.expand([
-        ("example 1", 61229),
-    ])
-    def test_calculate_sum_of_all_output_digits(self, _, expected):
-        self.assertEqual(expected, day8.calculate_sum_of_all_output_digits(self.data))
+    def test_calculate_sum_of_all_output_digits(self, _, raw_data, expected):
+        data = [[x.split() for x in line.split(" | ")] for line in raw_data]
+        self.assertEqual(expected, day8.calculate_sum_of_all_output_digits(data))
 
 
 class Day9(unittest.TestCase):
