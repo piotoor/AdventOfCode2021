@@ -403,7 +403,7 @@ class Day11(unittest.TestCase):
     @parameterized.expand([
         ("aoc example 1", data, 195),
     ])
-    def test_count_number_of_flashes(self, _, data, expected):
+    def test_count_steps_to_simultaneous_flash(self, _, data, expected):
         handler = day11.OctopusEngeryHandler(data)
         self.assertEqual(expected, handler.count_steps_to_simultaneous_flash())
 

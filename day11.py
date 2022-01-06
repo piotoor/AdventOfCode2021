@@ -1,4 +1,5 @@
 from utilities import non_blank_lines
+from copy import deepcopy
 
 
 def parse_day11_data():
@@ -10,7 +11,7 @@ def parse_day11_data():
 
 class OctopusEngeryHandler:
     def __init__(self, data):
-        self.data = data
+        self.data = deepcopy(data)
         self.num_of_flashes = 0
         self.already_flashed = set()
 
