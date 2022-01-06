@@ -201,13 +201,11 @@ class Day5(unittest.TestCase):
 
 
 class Day6(unittest.TestCase):
-    def setUp(self):
-        self.data = [3, 4, 3, 1, 2]
-        self.days = 80
-        self.expected = 5934
-
-    def test_count_lanternfish(self):
-        self.assertEqual(self.expected, day6.count_lanternfish(self.data, self.days))
+    @parameterized.expand([
+        ("example 1", [3, 4, 3, 1, 2], 80, 5934),
+    ])
+    def test_count_lanternfish(self, _, data, days, expected):
+        self.assertEqual(expected, day6.count_lanternfish(data, days))
 
 
 class Day7(unittest.TestCase):
