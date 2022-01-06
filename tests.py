@@ -135,8 +135,7 @@ class Day4(unittest.TestCase):
 
 
 class Day5(unittest.TestCase):
-    @parameterized.expand([
-        ("example 1", [
+    data = [
             (0, 9, 5, 9),
             (8, 0, 0, 8),
             (9, 4, 3, 4),
@@ -147,25 +146,17 @@ class Day5(unittest.TestCase):
             (3, 4, 1, 4),
             (0, 0, 8, 8),
             (5, 5, 8, 2)
-        ], 5),
+    ]
+
+    @parameterized.expand([
+        ("example 1", data, 5),
         ("example 2 puzzle data", day5.parse_day5_data(), 7142),
     ])
     def test_count_overlapping_horizontal_vertical(self, _, data, expected):
         self.assertEqual(expected, day5.count_overlapping_horizontal_vertical(data))
 
     @parameterized.expand([
-        ("example 1", [
-            (0, 9, 5, 9),
-            (8, 0, 0, 8),
-            (9, 4, 3, 4),
-            (2, 2, 2, 1),
-            (7, 0, 7, 4),
-            (6, 4, 2, 0),
-            (0, 9, 2, 9),
-            (3, 4, 1, 4),
-            (0, 0, 8, 8),
-            (5, 5, 8, 2)
-        ], 12),
+        ("example 1", data, 12),
         ("example 2 puzzle data", day5.parse_day5_data(), 20012),
     ])
     def test_count_overlapping_horizontal_vertical_diagonal(self, _, data, expected):
