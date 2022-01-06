@@ -58,8 +58,7 @@ class Day2(unittest.TestCase):
 
 
 class Day3(unittest.TestCase):
-    @parameterized.expand([
-        ("example 1", [
+    data = [
              '00100',
              '11110',
              '10110',
@@ -72,27 +71,17 @@ class Day3(unittest.TestCase):
              '11001',
              '00010',
              '01010'
-        ], 198),
+    ]
+
+    @parameterized.expand([
+        ("example 1", data, 198),
         ("example 2 puzzle data", day3.parse_day3_data(), 4139586),
     ])
     def test_calculate_power_consumption(self, _, data, expected):
         self.assertEqual(expected, day3.calculate_power_consumption(data))
 
     @parameterized.expand([
-        ("example 1", [
-             '00100',
-             '11110',
-             '10110',
-             '10111',
-             '10101',
-             '01111',
-             '00111',
-             '11100',
-             '10000',
-             '11001',
-             '00010',
-             '01010'
-        ], 230),
+        ("example 1", data, 230),
         ("example 2 puzzle data", day3.parse_day3_data(), 1800151),
     ])
     def test_calculate_life_support_rating(self, _, data, expected):
