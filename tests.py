@@ -238,17 +238,17 @@ class Day8(unittest.TestCase):
         ]
 
     @parameterized.expand([
-        ("example 1", raw_data, 26),
+        ("example 1", [[x.split() for x in line.split(" | ")] for line in raw_data], 26),
+        ("example 2 puzzle data", day8.parse_day8_data(), 397),
     ])
-    def test_count_digits_made_of_unique_number_of_segments(self, _, raw_data, expected):
-        data = [[x.split() for x in line.split(" | ")] for line in raw_data]
+    def test_count_digits_made_of_unique_number_of_segments(self, _, data, expected):
         self.assertEqual(expected, day8.count_digits_made_of_unique_number_of_segments(data))
 
     @parameterized.expand([
-        ("example 1", raw_data, 61229),
+        ("example 1", [[x.split() for x in line.split(" | ")] for line in raw_data], 61229),
+        ("example 2 puzzle data", day8.parse_day8_data(), 1027422),
     ])
-    def test_calculate_sum_of_all_output_digits(self, _, raw_data, expected):
-        data = [[x.split() for x in line.split(" | ")] for line in raw_data]
+    def test_calculate_sum_of_all_output_digits(self, _, data, expected):
         self.assertEqual(expected, day8.calculate_sum_of_all_output_digits(data))
 
 
