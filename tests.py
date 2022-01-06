@@ -7,6 +7,7 @@ import day5
 import day6
 import day7
 import day8
+import day9
 import unittest
 from parameterized import parameterized
 
@@ -239,7 +240,7 @@ class Day9(unittest.TestCase):
 
     ])
     def test_calculate_sum_of_the_risk_levels(self, _, data, expected):
-        self.assertEqual(expected, solutions.calculate_sum_of_the_risk_levels(data))
+        self.assertEqual(expected, day9.calculate_sum_of_the_risk_levels(data))
 
     @parameterized.expand([
         ("aoc example", [
@@ -251,7 +252,7 @@ class Day9(unittest.TestCase):
         ], 1134),
     ])
     def test_calculate_sum_of_three_largest_basins(self, _, data, expected):
-        basin_handler = solutions.BasinHandler(data)
+        basin_handler = day9.BasinHandler(data)
         self.assertEqual(expected, basin_handler.calculate_sum_of_three_largest_basins())
 
 
