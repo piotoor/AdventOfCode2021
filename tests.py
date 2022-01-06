@@ -4,6 +4,7 @@ import day2
 import day3
 import day4
 import day5
+import day6
 import unittest
 from parameterized import parameterized
 
@@ -206,7 +207,7 @@ class Day6(unittest.TestCase):
         self.expected = 5934
 
     def test_count_lanternfish(self):
-        self.assertEqual(self.expected, solutions.count_lanternfish(self.data, self.days))
+        self.assertEqual(self.expected, day6.count_lanternfish(self.data, self.days))
 
 
 class Day7(unittest.TestCase):
