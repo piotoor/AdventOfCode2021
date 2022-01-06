@@ -8,6 +8,7 @@ import day6
 import day7
 import day8
 import day9
+import day10
 import unittest
 from parameterized import parameterized
 
@@ -273,7 +274,7 @@ class Day10(unittest.TestCase):
         ("own example 2", "<<<<>>>)", ')')
     ])
     def test_find_first_corrupted_bracket_in_expr(self, _, expression, expected):
-        self.assertEqual(expected, solutions.ParenthesisParser.find_first_corrupted_bracket_in_expr(expression))
+        self.assertEqual(expected, day10.ParenthesisParser.find_first_corrupted_bracket_in_expr(expression))
 
     @parameterized.expand([
         ("own example 1", [
@@ -312,7 +313,7 @@ class Day10(unittest.TestCase):
         ], 26397),
     ])
     def test_calculate_syntax_error_score(self, _, data, expected):
-        parser = solutions.ParenthesisParser(data)
+        parser = day10.ParenthesisParser(data)
         self.assertEqual(expected, parser.calculate_syntax_error_score())
 
     @parameterized.expand([
@@ -328,7 +329,7 @@ class Day10(unittest.TestCase):
         ("aoc example 10", "<{([{{}}[<[[[<>{}]]]>[]]", "])}>"),
     ])
     def test_find_missing_brackets_in_expr(self, _, expression, expected):
-        self.assertEqual(expected, solutions.ParenthesisParser.find_missing_brackets_in_expr(expression))
+        self.assertEqual(expected, day10.ParenthesisParser.find_missing_brackets_in_expr(expression))
 
     @parameterized.expand([
         ("own example 1", [
@@ -364,7 +365,7 @@ class Day10(unittest.TestCase):
         ], 288957),
     ])
     def test_calculate_autocomplete_score(self, _, data, expected):
-        parser = solutions.ParenthesisParser(data)
+        parser = day10.ParenthesisParser(data)
         self.assertEqual(expected, parser.calculate_autocomplete_score())
 
 
