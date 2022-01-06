@@ -237,7 +237,7 @@ class Day9(unittest.TestCase):
             [1, 1, 1, 3, 3, 3, 1, 1, 1, 1],
             [0, 1, 1, 1, 1, 1, 1, 1, 1, 0]
         ], 6),
-
+        ("example 3 puzzle data", day9.parse_day9_data(), 506),
     ])
     def test_calculate_sum_of_the_risk_levels(self, _, data, expected):
         self.assertEqual(expected, day9.calculate_sum_of_the_risk_levels(data))
@@ -250,6 +250,7 @@ class Day9(unittest.TestCase):
             [8, 7, 6, 7, 8, 9, 6, 7, 8, 9],
             [9, 8, 9, 9, 9, 6, 5, 6, 7, 8]
         ], 1134),
+        ("example 2 puzzle data", day9.parse_day9_data(), 931200),
     ])
     def test_calculate_sum_of_three_largest_basins(self, _, data, expected):
         basin_handler = day9.BasinHandler(data)
