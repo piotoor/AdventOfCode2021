@@ -459,7 +459,8 @@ class Day12(unittest.TestCase):
     @parameterized.expand([
         ("aoc example 1", data[0], 10),
         ("aoc example 2", data[1], 19),
-        ("aoc example 3", data[2], 226)
+        ("aoc example 3", data[2], 226),
+        ("puzzle data", day12.parse_day12_data(), 4773)
     ])
     def test_count_paths_visiting_all_small_caves_once(self, _, data, expected):
         pf = day12.Pathfinder(data)
@@ -468,7 +469,8 @@ class Day12(unittest.TestCase):
     @parameterized.expand([
         ("aoc example 1", data[0], 36),
         ("aoc example 2", data[1], 103),
-        ("aoc example 3", data[2], 3509)
+        ("aoc example 3", data[2], 3509),
+        ("puzzle data", day12.parse_day12_data(), 116985)
     ])
     def test_count_paths_visiting_all_small_caves_but_one_once(self, _, data, expected):
         pf = day12.Pathfinder(data)
