@@ -720,8 +720,10 @@ class Day16(unittest.TestCase):
 
 
 class Day17(unittest.TestCase):
+    data = (20, 30, -10, -5)
+
     @parameterized.expand([
-        ("aoc example 1", (20, 30, -10, -5), 45),
+        ("aoc example 1", data, 45),
     ])
     def test_find_highest_y(self, _, data, expected):
         launcher = day17.ProbeLauncher(data)
@@ -729,7 +731,7 @@ class Day17(unittest.TestCase):
         self.assertEqual(expected, launcher.find_highest_y())
 
     @parameterized.expand([
-        ("aoc example 1", (20, 30, -10, -5), 112),
+        ("aoc example 1", data, 112),
     ])
     def test_find_highest_y(self, _, data, expected):
         launcher = day17.ProbeLauncher(data)
