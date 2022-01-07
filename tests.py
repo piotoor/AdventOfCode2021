@@ -12,6 +12,7 @@ import day10
 import day11
 import day12
 import day13
+import day14
 import unittest
 from parameterized import parameterized
 
@@ -564,7 +565,7 @@ class Day14(unittest.TestCase):
         ], 40, 2188189693529)
     ])
     def test_most_common_least_common_diff(self, _, data, steps, expected):
-        handler = solutions.PolymerHandler(data)
+        handler = day14.PolymerHandler(data)
         self.assertEqual(expected, handler.most_common_least_common_diff(steps))
 
 
