@@ -1091,6 +1091,13 @@ class Day20(unittest.TestCase):
     def test_apply_padding(self, _, img, padding_char, padding_size, expected):
         self.assertEqual(expected, day20.ImageEnhancer.apply_padding(img, padding_char, padding_size))
 
+    @parameterized.expand([
+        ("puzzle data part 1", day20.parse_day20_data(), 2, 5259),
+        ("puzzle data part 2", day20.parse_day20_data(), 50, 15287)
+    ])
+    def test_count_lit_pixels(self, _, data, iterations, expected):
+        enhancer = day20.ImageEnhancer(data)
+        self.assertEqual(expected, enhancer.count_lit_pixels(iterations))
 
 
 class Day21(unittest.TestCase):
