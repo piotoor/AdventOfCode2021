@@ -1104,6 +1104,7 @@ class Day20(unittest.TestCase):
 class Day21(unittest.TestCase):
     @parameterized.expand([
         ("aoc example 1", (4, 8), 100, 739785),
+        ("puzzle data", day21.parse_day21_data(), 100, 1004670)
     ])
     def test_calculate_losing_score_x_num_of_rolls(self, _, players_pos, dice_size, expected):
         roller = day21.DiceRoller(players_pos)
@@ -1111,6 +1112,7 @@ class Day21(unittest.TestCase):
 
     @parameterized.expand([
         ("aoc example 1", (4, 8), 444356092776315),
+        ("puzzle data", day21.parse_day21_data(), 492043106122795)
     ])
     def test_calculate_number_of_universes(self, _, players_pos, expected):
         roller = day21.DiceRoller(players_pos)
