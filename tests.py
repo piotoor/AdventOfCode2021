@@ -18,6 +18,7 @@ import day16
 import day17
 import day18
 import day19
+import day20
 import unittest
 from parameterized import parameterized
 
@@ -1088,7 +1089,8 @@ class Day20(unittest.TestCase):
          ])
     ])
     def test_apply_padding(self, _, img, padding_char, padding_size, expected):
-        self.assertEqual(expected, solutions.ImageEnhancer.apply_padding(img, padding_char, padding_size))
+        self.assertEqual(expected, day20.ImageEnhancer.apply_padding(img, padding_char, padding_size))
+
 
 
 class Day21(unittest.TestCase):
