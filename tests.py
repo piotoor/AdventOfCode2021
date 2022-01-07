@@ -16,6 +16,7 @@ import day14
 import day15
 import day16
 import day17
+import day18
 import unittest
 from parameterized import parameterized
 
@@ -755,7 +756,7 @@ class Day18(unittest.TestCase):
          [[3, 1], [2, 2], [8, 3], [0, 3], [9, 1], [5, 2], [7, 3], [0, 3]])
     ])
     def test_single_explode_performed(self, _, data, expected):
-        self.assertEqual((True, expected), solutions.SnailfishCalculator.explode(data))
+        self.assertEqual((True, expected), day18.SnailfishCalculator.explode(data))
 
     @parameterized.expand([
         ("aoc example 1", [[1, 0], [1, 0]],
@@ -764,7 +765,7 @@ class Day18(unittest.TestCase):
          [[1, 0], [1, 0], [9, 1], [9, 1]]),
     ])
     def test_single_explode_not_performed(self, _, data, expected):
-        self.assertEqual((False, expected), solutions.SnailfishCalculator.explode(data))
+        self.assertEqual((False, expected), day18.SnailfishCalculator.explode(data))
 
     @parameterized.expand([
         ("aoc example 1", [[0, 3], [7, 3], [4, 2], [15, 2], [0, 3], [13, 3], [1, 1], [1, 1]],
@@ -773,7 +774,7 @@ class Day18(unittest.TestCase):
          [[0, 3], [7, 3], [4, 2], [7, 3], [8, 3], [0, 3], [6, 4], [7, 4], [1, 1], [1, 1]]),
     ])
     def test_single_split_performed(self, _, data, expected):
-        self.assertEqual((True, expected), solutions.SnailfishCalculator.split(data))
+        self.assertEqual((True, expected), day18.SnailfishCalculator.split(data))
 
     @parameterized.expand([
         ("aoc example 1", [[1, 0], [1, 0]],
@@ -782,7 +783,7 @@ class Day18(unittest.TestCase):
          [[1, 0], [1, 0], [9, 1], [9, 1]]),
     ])
     def test_single_split_not_performed(self, _, data, expected):
-        self.assertEqual((False, expected), solutions.SnailfishCalculator.split(data))
+        self.assertEqual((False, expected), day18.SnailfishCalculator.split(data))
 
     @parameterized.expand([
         ("aoc example 1", [[1, 0], [2, 0]],
@@ -790,7 +791,7 @@ class Day18(unittest.TestCase):
          [[1, 1], [2, 1], [3, 2], [4, 2], [5, 1]])
     ])
     def test_single_add(self, _, num1, num2, expected):
-        self.assertEqual(expected, solutions.SnailfishCalculator.add(num1, num2))
+        self.assertEqual(expected, day18.SnailfishCalculator.add(num1, num2))
 
     @parameterized.expand([
         ("aoc example 1", [[[1, 0], [1, 0]],
@@ -818,7 +819,7 @@ class Day18(unittest.TestCase):
           [8, 3], [8, 3], [0, 3]])
     ])
     def test_chain_add(self, _, numbers, expected):
-        self.assertEqual(expected, solutions.SnailfishCalculator.chain_add(numbers))
+        self.assertEqual(expected, day18.SnailfishCalculator.chain_add(numbers))
 
     @parameterized.expand([
         ("aoc example 1", [[9, 0], [1, 0]], 29),
@@ -828,7 +829,7 @@ class Day18(unittest.TestCase):
         ("aoc example 5", [[0, 3], [7, 3], [4, 2], [7, 3], [8, 3], [6, 3], [0, 3], [8, 1], [1, 1]], 1384)
     ])
     def test_calculate_magnitude(self, _, data, expected):
-        self.assertEqual(expected, solutions.SnailfishCalculator.calculate_magnitude(data))
+        self.assertEqual(expected, day18.SnailfishCalculator.calculate_magnitude(data))
 
     @parameterized.expand([
         ("aoc example 1", [
@@ -845,7 +846,7 @@ class Day18(unittest.TestCase):
         ], 3993),
     ])
     def test_calculate_largest_sum_of_two_numbers(self, _, data, expected):
-        calc = solutions.SnailfishCalculator(data)
+        calc = day18.SnailfishCalculator(data)
         self.assertEqual(expected, calc.calculate_largest_sum_of_two_numbers())
 
 
