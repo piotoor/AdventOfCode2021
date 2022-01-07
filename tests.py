@@ -1000,6 +1000,7 @@ class Day19(unittest.TestCase):
                 [30, -46, -14]
             ]
         ], 79),
+        ("puzzle data", day19.parse_day19_data(), 367)
     ])
     def test_count_beacons(self, _, data, expected):
         handler = day19.BeaconHandler(data)
@@ -1063,6 +1064,13 @@ class Day19(unittest.TestCase):
     ])
     def test_calculate_manhattan_distance(self, _, point_a, point_b, expected):
         self.assertEqual(expected, day19.BeaconHandler.calculate_manhattan_distance(point_a, point_b))
+
+    @parameterized.expand([
+        ("puzzle data", day19.parse_day19_data(), 11925)
+    ])
+    def test_find_max_manhattan_distance(self, _, data, expected):
+        handler = day19.BeaconHandler(data)
+        self.assertEqual(expected, handler.find_largest_manhattan_distance())
 
 
 class Day20(unittest.TestCase):
