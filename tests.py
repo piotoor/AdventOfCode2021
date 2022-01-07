@@ -696,6 +696,7 @@ class Day16(unittest.TestCase):
         ("aoc example 5", "620080001611562C8802118E34", 12),
         ("aoc example 6", "C0015000016115A2E0802F182340", 23),
         ("aoc example 7", "A0016C880162017C3686B18A3D4780", 31),
+        ("puzzle data", day16.parse_day16_data(), 917),
     ])
     def test_calculate_sum_of_packet_versions(self, _, data, expected):
         handler = day16.TransmissionHandler(data)
@@ -710,6 +711,7 @@ class Day16(unittest.TestCase):
         ("aoc example 6", "F600BC2D8F", 0),
         ("aoc example 7", "9C005AC2F8F0", 0),
         ("aoc example 8", "9C0141080250320F1802104A08", 1),
+        ("puzzle data", day16.parse_day16_data(), 2536453523344),
     ])
     def test_calculate_value_of_the_outermost_packet(self, _, data, expected):
         handler = day16.TransmissionHandler(data)
