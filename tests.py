@@ -479,8 +479,7 @@ class Day12(unittest.TestCase):
 
 
 class Day13(unittest.TestCase):
-    def setUp(self):
-        self.dots = {
+    dots = {
             (6, 10),
             (0, 14),
             (9, 10),
@@ -499,19 +498,26 @@ class Day13(unittest.TestCase):
             (2, 14),
             (8, 10),
             (9, 0),
-        }
-        self.instructions = [
+    }
+    instructions = [
             ('y', 7),
             ('x', 5)
-        ]
+    ]
+    data = (dots, instructions)
 
-    def test_count_dots_after_single_fold(self):
-        folder = day13.OrigamiFolder((self.dots, self.instructions))
+    @parameterized.expand([
+        ("aoc example 1", data, 17),
+    ])
+    def test_count_dots_after_single_fold(self, _, data, expected):
+        folder = day13.OrigamiFolder(data)
         expected = 17
         self.assertEqual(folder.count_dots_after_single_fold(), expected)
 
-    def test_count_dots_after_full_fold(self):
-        folder = day13.OrigamiFolder((self.dots, self.instructions))
+    @parameterized.expand([
+        ("aoc example 1", data, 16),
+    ])
+    def test_count_dots_after_full_fold(self, _, data, expected):
+        folder = day13.OrigamiFolder(data)
         expected = 16
         self.assertEqual(folder.count_dots_after_full_fold(), expected)
 
