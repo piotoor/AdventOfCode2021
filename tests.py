@@ -19,6 +19,7 @@ import day17
 import day18
 import day19
 import day20
+import day21
 import unittest
 from parameterized import parameterized
 
@@ -1105,14 +1106,14 @@ class Day21(unittest.TestCase):
         ("aoc example 1", (4, 8), 100, 739785),
     ])
     def test_calculate_losing_score_x_num_of_rolls(self, _, players_pos, dice_size, expected):
-        roller = solutions.DiceRoller(players_pos)
+        roller = day21.DiceRoller(players_pos)
         self.assertEqual(expected, roller.calculate_losing_score_x_num_of_rolls(dice_size))
 
     @parameterized.expand([
         ("aoc example 1", (4, 8), 444356092776315),
     ])
     def test_calculate_number_of_universes(self, _, players_pos, expected):
-        roller = solutions.DiceRoller(players_pos)
+        roller = day21.DiceRoller(players_pos)
         self.assertEqual(expected, roller.calculate_number_of_universes())
 
 
