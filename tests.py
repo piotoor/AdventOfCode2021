@@ -14,6 +14,7 @@ import day12
 import day13
 import day14
 import day15
+import day16
 import unittest
 from parameterized import parameterized
 
@@ -697,7 +698,7 @@ class Day16(unittest.TestCase):
         ("aoc example 7", "A0016C880162017C3686B18A3D4780", 31),
     ])
     def test_calculate_sum_of_packet_versions(self, _, data, expected):
-        handler = solutions.TransmissionHandler(data)
+        handler = day16.TransmissionHandler(data)
         self.assertEqual(expected, handler.calculate_sum_of_packet_versions())
 
     @parameterized.expand([
@@ -711,7 +712,7 @@ class Day16(unittest.TestCase):
         ("aoc example 8", "9C0141080250320F1802104A08", 1),
     ])
     def test_calculate_value_of_the_outermost_packet(self, _, data, expected):
-        handler = solutions.TransmissionHandler(data)
+        handler = day16.TransmissionHandler(data)
         self.assertEqual(expected, handler.calculate_value_of_the_outermost_packet())
 
 
