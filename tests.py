@@ -562,7 +562,9 @@ class Day14(unittest.TestCase):
             ("BC", "B"),
             ("CC", "N"),
             ("CN", "C")
-        ], 40, 2188189693529)
+        ], 40, 2188189693529),
+        ("puzzle data", day14.parse_day14_data(), 10, 2003),
+        ("puzzle data", day14.parse_day14_data(), 40, 2276644000111),
     ])
     def test_most_common_least_common_diff(self, _, data, steps, expected):
         handler = day14.PolymerHandler(data)
