@@ -13,6 +13,7 @@ import day11
 import day12
 import day13
 import day14
+import day15
 import unittest
 from parameterized import parameterized
 
@@ -623,7 +624,7 @@ class Day15(unittest.TestCase):
         ], 25)
     ])
     def test_find_path_of_the_lowest_risk(self, _, data, expected):
-        pathfinder = solutions.WeightedPathfinder(data)
+        pathfinder = day15.WeightedPathfinder(data)
         self.assertEqual(expected, pathfinder.find_path_of_the_lowest_risk())
 
     @parameterized.expand([
@@ -659,7 +660,7 @@ class Day15(unittest.TestCase):
          ])
     ])
     def test_extend_data(self, _, data, expected):
-        extended_data = solutions.WeightedPathfinder.extend_data(data)
+        extended_data = day15.WeightedPathfinder.extend_data(data)
         # for x in extended_data:
         #     print(x)
         self.assertEqual(expected, extended_data)
@@ -679,7 +680,7 @@ class Day15(unittest.TestCase):
         ], 315)
     ])
     def test_find_path_of_the_lowest_risk_extended(self, _, data, expected):
-        pathfinder = solutions.WeightedPathfinder(data)
+        pathfinder = day15.WeightedPathfinder(data)
         self.assertEqual(expected, pathfinder.find_path_of_the_lowest_risk_extended())
 
 
