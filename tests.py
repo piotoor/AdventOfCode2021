@@ -17,6 +17,7 @@ import day15
 import day16
 import day17
 import day18
+import day19
 import unittest
 from parameterized import parameterized
 
@@ -1001,7 +1002,7 @@ class Day19(unittest.TestCase):
         ], 79),
     ])
     def test_count_beacons(self, _, data, expected):
-        handler = solutions.BeaconHandler(data)
+        handler = day19.BeaconHandler(data)
         self.assertEqual(expected, handler.count_beacons())
 
     @parameterized.expand([
@@ -1018,7 +1019,7 @@ class Day19(unittest.TestCase):
         ("rotate z3", [1, 2, 3], [8], [-2, 1, 3]),
     ])
     def test_rotate(self, _, point, rot, expected):
-        self.assertEqual(expected, solutions.BeaconHandler.rotate(point, rot))
+        self.assertEqual(expected, day19.BeaconHandler.rotate(point, rot))
 
     @parameterized.expand([
         ("single point", [[1, 2, 3]], {
@@ -1055,13 +1056,13 @@ class Day19(unittest.TestCase):
 
     ])
     def test_generate_all_rotations(self, _, points, expected):
-        self.assertEqual(expected, solutions.BeaconHandler.generate_all_rotations(points))
+        self.assertEqual(expected, day19.BeaconHandler.generate_all_rotations(points))
 
     @parameterized.expand([
         ("aoc example 1", [1105, -1205, 1229], [-92, -2380, -20], 3621),
     ])
     def test_calculate_manhattan_distance(self, _, point_a, point_b, expected):
-        self.assertEqual(expected, solutions.BeaconHandler.calculate_manhattan_distance(point_a, point_b))
+        self.assertEqual(expected, day19.BeaconHandler.calculate_manhattan_distance(point_a, point_b))
 
 
 class Day20(unittest.TestCase):
