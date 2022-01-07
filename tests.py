@@ -15,6 +15,7 @@ import day13
 import day14
 import day15
 import day16
+import day17
 import unittest
 from parameterized import parameterized
 
@@ -723,7 +724,7 @@ class Day17(unittest.TestCase):
         ("aoc example 1", (20, 30, -10, -5), 45),
     ])
     def test_find_highest_y(self, _, data, expected):
-        launcher = solutions.ProbeLauncher(data)
+        launcher = day17.ProbeLauncher(data)
         launcher.compute()
         self.assertEqual(expected, launcher.find_highest_y())
 
@@ -731,7 +732,7 @@ class Day17(unittest.TestCase):
         ("aoc example 1", (20, 30, -10, -5), 112),
     ])
     def test_find_highest_y(self, _, data, expected):
-        launcher = solutions.ProbeLauncher(data)
+        launcher = day17.ProbeLauncher(data)
         launcher.compute()
         self.assertEqual(expected, launcher.count_initial_velocities())
 
