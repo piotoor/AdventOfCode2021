@@ -621,7 +621,8 @@ class Day15(unittest.TestCase):
             [1, 1, 1, 1, 1, 9, 1, 1, 1, 1],
             [1, 1, 1, 1, 1, 9, 1, 1, 1, 1],
             [1, 1, 1, 1, 1, 9, 1, 1, 1, 1],
-        ], 25)
+        ], 25),
+        ("puzzle data", day15.parse_day15_data(), 441)
     ])
     def test_find_path_of_the_lowest_risk(self, _, data, expected):
         pathfinder = day15.WeightedPathfinder(data)
@@ -677,7 +678,8 @@ class Day15(unittest.TestCase):
             [3, 1, 2, 5, 4, 2, 1, 6, 3, 9],
             [1, 2, 9, 3, 1, 3, 8, 5, 2, 1],
             [2, 3, 1, 1, 9, 4, 4, 5, 8, 1],
-        ], 315)
+        ], 315),
+        ("puzzle data", day15.parse_day15_data(), 2849)
     ])
     def test_find_path_of_the_lowest_risk_extended(self, _, data, expected):
         pathfinder = day15.WeightedPathfinder(data)
