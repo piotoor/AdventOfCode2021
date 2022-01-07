@@ -507,18 +507,18 @@ class Day13(unittest.TestCase):
 
     @parameterized.expand([
         ("aoc example 1", data, 17),
+        ("puzzle data", day13.parse_day13_data(), 695)
     ])
     def test_count_dots_after_single_fold(self, _, data, expected):
         folder = day13.OrigamiFolder(data)
-        expected = 17
         self.assertEqual(folder.count_dots_after_single_fold(), expected)
 
     @parameterized.expand([
         ("aoc example 1", data, 16),
+        ("puzzle data", day13.parse_day13_data(), 89)
     ])
     def test_count_dots_after_full_fold(self, _, data, expected):
         folder = day13.OrigamiFolder(data)
-        expected = 16
         self.assertEqual(folder.count_dots_after_full_fold(), expected)
 
 
