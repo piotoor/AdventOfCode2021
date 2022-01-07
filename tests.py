@@ -724,6 +724,7 @@ class Day17(unittest.TestCase):
 
     @parameterized.expand([
         ("aoc example 1", data, 45),
+        ("puzzle input", day17.parse_day17_data(), 4753),
     ])
     def test_find_highest_y(self, _, data, expected):
         launcher = day17.ProbeLauncher(data)
@@ -732,6 +733,7 @@ class Day17(unittest.TestCase):
 
     @parameterized.expand([
         ("aoc example 1", data, 112),
+        ("puzzle input", day17.parse_day17_data(), 1546),
     ])
     def test_find_highest_y(self, _, data, expected):
         launcher = day17.ProbeLauncher(data)
