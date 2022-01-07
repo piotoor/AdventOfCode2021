@@ -11,6 +11,7 @@ import day9
 import day10
 import day11
 import day12
+import day13
 import unittest
 from parameterized import parameterized
 
@@ -505,12 +506,12 @@ class Day13(unittest.TestCase):
         ]
 
     def test_count_dots_after_single_fold(self):
-        folder = solutions.OrigamiFolder((self.dots, self.instructions))
+        folder = day13.OrigamiFolder((self.dots, self.instructions))
         expected = 17
         self.assertEqual(folder.count_dots_after_single_fold(), expected)
 
     def test_count_dots_after_full_fold(self):
-        folder = solutions.OrigamiFolder((self.dots, self.instructions))
+        folder = day13.OrigamiFolder((self.dots, self.instructions))
         expected = 16
         self.assertEqual(folder.count_dots_after_full_fold(), expected)
 
