@@ -60,3 +60,7 @@ def day25_a():
     data = parse_day25_data()
     handler = CucumberHandler(data)
     print("day25_a = {}".format(handler.count_steps()))
+
+
+def day25():
+    day25_a()

@@ -46,3 +46,8 @@ def day6_a():
 def day6_b():
     data = parse_day6_data()
     print("day6_b = {}".format(count_lanternfish(data, 256)))
+
+
+def day6():
+    day6_a()
+    day6_b()

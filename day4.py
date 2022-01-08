@@ -124,3 +124,8 @@ def day4_b():
         bingo.step()
 
     print("day4_b = {}".format(bingo.get_winner_points()))
+
+
+def day4():
+    day4_a()
+    day4_b()

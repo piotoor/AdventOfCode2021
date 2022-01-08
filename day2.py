@@ -44,3 +44,8 @@ def day2_a():
 def day2_b():
     data = parse_day2_data()
     print("day2_b = {}".format(calculate_hrz_depth_aim_product(data)))
+
+
+def day2():
+    day2_a()
+    day2_b()

@@ -1,52 +1,66 @@
-import solutions
+import day1
+import day2
+import day3
+import day4
+import day5
+import day6
+import day7
+import day8
+import day9
+import day10
+import day11
+import day12
+import day13
+import day14
+import day15
+import day16
+import day17
+import day18
+import day19
+import day20
+import day21
+import day22
+import day23
+import day24
+import day25
+import argparse
 
 if __name__ == '__main__':
-    # day1.solutions.day1_a()
-    # day1.solutions.day1_b()
-    # solutions.day2_a()
-    # solutions.day2_b()
-    # solutions.day3_a()
-    # solutions.day3_b()
-    # solutions.day4_a()
-    # solutions.day4_b()
-    # solutions.day5_a()
-    # solutions.day5_b()
-    # solutions.day6_a()
-    # solutions.day6_b()
-    # solutions.day7_a()
-    # solutions.day7_b()
-    # solutions.day8_a()
-    # solutions.day8_b()
-    # solutions.day9_a()
-    # solutions.day9_b()
-    # solutions.day10_a()
-    # solutions.day10_b()
-    # solutions.day11_a()
-    # solutions.day11_b()
-    # solutions.day12_a()
-    # solutions.day12_b()
-    # solutions.day13_a()
-    # solutions.day13_b()
-    # solutions.day14_a()
-    # solutions.day14_b()
-    # solutions.day15_a()
-    # solutions.day15_b()
-    # solutions.day16_a()
-    # solutions.day16_b()
-    # solutions.day17_a()
-    # solutions.day17_b()
-    # solutions.day18_a()
-    # solutions.day18_b()
-    # solutions.day19_a()
-    # solutions.day19_b()
-    # solutions.day20_a()
-    # solutions.day20_b()
-    # solutions.day21_a()
-    # solutions.day21_b()
-    # solutions.day22_a()
-    # solutions.day22_b()
-    # solutions.day23_a()
-    # solutions.day23_b()
-    # solutions.day24_a()
-    # solutions.day24_b()
-    solutions.day25_a()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-d', '--days', nargs='+', choices=[x for x in range(1, 26)], type=int)
+    args = parser.parse_args()
+
+    days_to_run = {x for x in range(1, 26)}
+    if args.days is not None:
+        days_to_run &= set(args.days)
+
+    days_functions = [
+        day1.day1,
+        day2.day2,
+        day3.day3,
+        day4.day4,
+        day5.day5,
+        day6.day6,
+        day7.day7,
+        day8.day8,
+        day9.day9,
+        day10.day10,
+        day11.day11,
+        day12.day12,
+        day13.day13,
+        day14.day14,
+        day15.day15,
+        day16.day16,
+        day17.day17,
+        day18.day18,
+        day19.day19,
+        day20.day20,
+        day21.day21,
+        day22.day22,
+        day23.day23,
+        day24.day24,
+        day25.day25,
+    ]
+
+    for day in days_to_run:
+        days_functions[day - 1]()

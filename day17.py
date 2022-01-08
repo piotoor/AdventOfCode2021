@@ -65,3 +65,8 @@ def day17_b():
     launcher = ProbeLauncher(data)
     launcher.compute()
     print("day17_b = {}".format(launcher.count_initial_velocities()))
+
+
+def day17():
+    day17_a()
+    day17_b()

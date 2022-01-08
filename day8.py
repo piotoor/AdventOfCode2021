@@ -96,3 +96,8 @@ def day8_a():
 def day8_b():
     data = parse_day8_data()
     print("day8_a = {}".format(calculate_sum_of_all_output_digits(data)))
+
+
+def day8():
+    day8_a()
+    day8_b()

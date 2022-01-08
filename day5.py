@@ -84,3 +84,8 @@ def day5_a():
 def day5_b():
     data = parse_day5_data()
     print("day5_b = {}".format(count_overlapping_horizontal_vertical_diagonal(data)))
+
+
+def day5():
+    day5_a()
+    day5_b()

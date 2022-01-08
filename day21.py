@@ -80,3 +80,8 @@ def day21_b():
     data = parse_day21_data()
     roller = DiceRoller(data)
     print("day21_b = {}".format(roller.calculate_number_of_universes()))
+
+
+def day21():
+    day21_a()
+    day21_b()

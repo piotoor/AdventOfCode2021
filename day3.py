@@ -56,3 +56,8 @@ def day3_a():
 def day3_b():
     data = parse_day3_data()
     print("day3_b = {}".format(calculate_life_support_rating(data)))
+
+
+def day3():
+    day3_a()
+    day3_b()

@@ -117,3 +117,8 @@ def day15_b():
     pathfinder = WeightedPathfinder(data)
     print("day15_b = {}".format(pathfinder.find_path_of_the_lowest_risk_extended()))
     print("duration = {}".format(time.time() - start))
+
+
+def day15():
+    day15_a()
+    day15_b()

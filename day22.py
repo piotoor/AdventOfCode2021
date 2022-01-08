@@ -180,3 +180,8 @@ def day22_b():
     data = parse_day22_data()
     handler = ReactorHandler(data)
     print("day22_b = {}".format(handler.count_all_cubes()))
+
+
+def day22():
+    day22_a()
+    day22_b()

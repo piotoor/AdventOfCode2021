@@ -103,3 +103,8 @@ def day10_b():
     parser = ParenthesisParser(data)
 
     print("day10_b = {}".format(parser.calculate_autocomplete_score()))
+
+
+def day10():
+    day10_a()
+    day10_b()

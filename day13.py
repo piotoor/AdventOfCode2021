@@ -93,3 +93,8 @@ def day13_b():
     folder = OrigamiFolder(data)
     print("day13_a = {}".format(folder.count_dots_after_full_fold()))
     folder.print()
+
+
+def day13():
+    day13_a()
+    day13_b()

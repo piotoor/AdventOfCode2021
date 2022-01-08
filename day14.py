@@ -66,3 +66,8 @@ def day14_b():
     data = parse_day14_data()
     poly_handler = PolymerHandler(data)
     print("day14_b = {}".format(poly_handler.most_common_least_common_diff(40)))
+
+
+def day14():
+    day14_a()
+    day14_b()

@@ -84,3 +84,8 @@ def day9_b():
     data = parse_day9_data()
     basin_handler = BasinHandler(data)
     print("day9_b = {}".format(basin_handler.calculate_sum_of_three_largest_basins()))
+
+
+def day9():
+    day9_a()
+    day9_b()

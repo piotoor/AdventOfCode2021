@@ -178,3 +178,8 @@ def day23_b():
     data = parse_day23b_data()
     handler = AmphipodHandler(data, large_rooms=True)
     print("day23_b = {}".format(handler.organize_amphipods()))
+
+
+def day23():
+    day23_a()
+    day23_b()

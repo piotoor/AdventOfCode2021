@@ -75,3 +75,8 @@ def day20_b():
     data = parse_day20_data()
     enhancer = ImageEnhancer(data)
     print("day20_b = {}".format(enhancer.count_lit_pixels(50)))
+
+
+def day20():
+    day20_a()
+    day20_b()

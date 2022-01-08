@@ -78,3 +78,8 @@ def day11_b():
     data = parse_day11_data()
     handler = OctopusEngeryHandler(data)
     print("day11_b = {}".format(handler.count_steps_to_simultaneous_flash()))
+
+
+def day11():
+    day11_a()
+    day11_b()

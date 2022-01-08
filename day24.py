@@ -196,3 +196,8 @@ def day24_b():
     data = parse_day24_data()
     handler = AssemblyHandler(data)
     print("day24_b = {}".format(handler.find_smallest_model()))
+
+
+def day24():
+    day24_a()
+    day24_b()

@@ -154,3 +154,8 @@ def day18_b():
     data = parse_day18_data()
     calc = SnailfishCalculator(data)
     print("day18_b = {}".format(calc.calculate_largest_sum_of_two_numbers()))
+
+
+def day18():
+    day18_a()
+    day18_b()

@@ -39,3 +39,8 @@ def day1_a():
 def day1_b():
     data = parse_day1_data()
     print("day1_b = {}".format(count_number_of_increased_windows(data)))
+
+
+def day1():
+    day1_a()
+    day1_b()

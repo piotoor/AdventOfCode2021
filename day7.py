@@ -33,3 +33,8 @@ def day7_a():
 def day7_b():
     data = parse_day7_data()
     print("day7_b = {}".format(find_optimal_fuel_usage(data, lambda x: int(0.5 * x * (x + 1)))))
+
+
+def day7():
+    day7_a()
+    day7_b()

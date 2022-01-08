@@ -84,3 +84,8 @@ def day12_b():
     data = parse_day12_data()
     pf = Pathfinder(data)
     print("day12_b = {}".format(pf.count_paths_visiting_all_small_caves_but_one_once()))
+
+
+def day12():
+    day12_a()
+    day12_b()

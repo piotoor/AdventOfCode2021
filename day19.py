@@ -195,3 +195,8 @@ def day19_b():
     data = parse_day19_data()
     handler = BeaconHandler(data)
     print("day19_b = {}".format(handler.find_largest_manhattan_distance()))
+
+
+def day19():
+    day19_a()
+    day19_b()
