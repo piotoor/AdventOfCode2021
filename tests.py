@@ -1128,6 +1128,7 @@ class Day22(unittest.TestCase):
             (False, 9, 11, 9, 11, 9, 11),
             (True, 10, 10, 10, 10, 10, 10),
         ], 39),
+        ("puzzle data", day22.parse_day22_data(), 650099)
     ])
     def test_count_cubes_in_initialization_area(self, _, data, expected):
         handler = day22.ReactorHandler(data)
@@ -1431,6 +1432,7 @@ class Day22(unittest.TestCase):
             (True, 1000, 2001, 100, 200, 1000, 2000),
             (False, 1000, 2001, 100, 200, 1000, 2000),
         ], 27),
+        ("puzzle data", day22.parse_day22_data(), 1254011191104293)
     ])
     def test_count_all_cubes(self, _, data, expected):
         handler = day22.ReactorHandler(data)
