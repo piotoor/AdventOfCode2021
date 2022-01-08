@@ -20,6 +20,7 @@ import day18
 import day19
 import day20
 import day21
+import day22
 import unittest
 from parameterized import parameterized
 
@@ -1129,7 +1130,7 @@ class Day22(unittest.TestCase):
         ], 39),
     ])
     def test_count_cubes_in_initialization_area(self, _, data, expected):
-        handler = solutions.ReactorHandler(data)
+        handler = day22.ReactorHandler(data)
         self.assertEqual(expected, handler.count_cubes_in_initialization_area())
 
     @parameterized.expand([
@@ -1179,7 +1180,7 @@ class Day22(unittest.TestCase):
          [(-2, 3, -2, 3, 2, 3)]),
     ])
     def test_cuboid_diff(self, _, a, b, expected):
-        self.assertEqual(expected, solutions.ReactorHandler.cuboid_diff(a, b))
+        self.assertEqual(expected, day22.ReactorHandler.cuboid_diff(a, b))
 
     @parameterized.expand([
         ("own example 1", (10, 12, 10, 12, 10, 12), 8),
@@ -1187,7 +1188,7 @@ class Day22(unittest.TestCase):
         ("own example 2", (-10, -10, -10, 12, 10, 120), 0),
     ])
     def test_cuboid_volume(self, _, cuboid, expected):
-        self.assertEqual(expected, solutions.ReactorHandler.cuboid_volume(cuboid))
+        self.assertEqual(expected, day22.ReactorHandler.cuboid_volume(cuboid))
 
     @parameterized.expand([
         ("aoc example 1 from part 2", [
@@ -1432,7 +1433,7 @@ class Day22(unittest.TestCase):
         ], 27),
     ])
     def test_count_all_cubes(self, _, data, expected):
-        handler = solutions.ReactorHandler(data)
+        handler = day22.ReactorHandler(data)
         self.assertEqual(expected, handler.count_all_cubes())
 
     @parameterized.expand([
@@ -1465,7 +1466,7 @@ class Day22(unittest.TestCase):
         ]),
     ])
     def test_compare_part_1_and_part_2_algs(self, _, data):
-        handler = solutions.ReactorHandler(data)
+        handler = day22.ReactorHandler(data)
         self.assertEqual(handler.count_cubes_in_initialization_area(), handler.count_all_cubes())
 
 
