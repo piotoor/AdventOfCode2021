@@ -1481,7 +1481,8 @@ class Day23(unittest.TestCase):
             [9, 9, 9, 2, 9, 3, 9, 2, 9, 4, 9, 9, 9],
             [9, 9, 9, 1, 9, 4, 9, 3, 9, 1, 9, 9, 9],
             [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
-        ], 12521)
+        ], 12521),
+        ("puzzle data", day23.parse_day23a_data(), 13495)
     ])
     def test_organize_amphipods(self, _, data, expected):
         handler = day23.AmphipodHandler(data, large_rooms=False)
@@ -1496,7 +1497,8 @@ class Day23(unittest.TestCase):
             [9, 9, 9, 4, 9, 2, 9, 1, 9, 3, 9, 9, 9],
             [9, 9, 9, 1, 9, 4, 9, 3, 9, 1, 9, 9, 9],
             [9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9],
-        ], 44169)
+        ], 44169),
+        ("puzzle data", day23.parse_day23b_data(), 53767)
     ])
     def test_organize_amphipods_large(self, _, data, expected):
         handler = day23.AmphipodHandler(data, large_rooms=True)
