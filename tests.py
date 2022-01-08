@@ -1749,7 +1749,8 @@ class Day25(unittest.TestCase):
          ".vv..>.>v.",
          "v.v..>>v.v",
          "....v..v.>"
-         ], 58)
+         ], 58),
+        ("puzzle data", day25.parse_day25_data(), 579)
     ])
     def test_count_steps(self, _, data, expected):
         board = [list(line) for line in data]
