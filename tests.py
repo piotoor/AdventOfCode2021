@@ -23,6 +23,7 @@ import day21
 import day22
 import day23
 import day24
+import day25
 import unittest
 from parameterized import parameterized
 
@@ -1752,5 +1753,5 @@ class Day25(unittest.TestCase):
     ])
     def test_count_steps(self, _, data, expected):
         board = [list(line) for line in data]
-        handler = solutions.CucumberHandler(board)
+        handler = day25.CucumberHandler(board)
         self.assertEqual(expected, handler.count_steps())
