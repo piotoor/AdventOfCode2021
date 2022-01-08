@@ -22,6 +22,7 @@ import day20
 import day21
 import day22
 import day23
+import day24
 import unittest
 from parameterized import parameterized
 
@@ -1717,6 +1718,22 @@ class Day23(unittest.TestCase):
     def test_possible_moves(self, _, data, large_rooms, expected):
         handler = day23.AmphipodHandler(data, large_rooms)
         self.assertEqual(expected, handler.all_possible_moves())
+
+
+class Day24(unittest.TestCase):
+    @parameterized.expand([
+        ("puzzle data", day24.parse_day24_data(), '99598963999971')
+    ])
+    def test_find_largest_model(self, _, data, expected):
+        handler = day24.AssemblyHandler(data)
+        self.assertEqual(expected, handler.find_largest_model())
+
+    @parameterized.expand([
+        ("puzzle data", day24.parse_day24_data(), '93151411711211')
+    ])
+    def test_find_smallest_model(self, _, data, expected):
+        handler = day24.AssemblyHandler(data)
+        self.assertEqual(expected, handler.find_smallest_model())
 
 
 class Day25(unittest.TestCase):
