@@ -1,6 +1,7 @@
 from utilities import non_blank_lines
 from collections import Counter
 
+
 class PolymerHandler:
     def __init__(self, data):
         self.polymer = data[0]

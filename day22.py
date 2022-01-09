@@ -11,7 +11,8 @@ class ReactorHandler:
         a_minx, a_maxx, a_miny, a_maxy, a_minz, a_maxz = a
         b_minx, b_maxx, b_miny, b_maxy, b_minz, b_maxz = b
 
-        if b_minx > a_maxx or a_minx > b_maxx or b_miny > a_maxy or a_miny > b_maxy or b_minz > a_maxz or a_minz > b_maxz:
+        if b_minx > a_maxx or a_minx > b_maxx or b_miny > a_maxy or\
+                a_miny > b_maxy or b_minz > a_maxz or a_minz > b_maxz:
             return True
         else:
             return False
@@ -122,7 +123,8 @@ class ReactorHandler:
 
         return len(area)
 
-    def convert_data(self, data):
+    @classmethod
+    def convert_data(cls, data):
         ans = []
 
         for x in data:
@@ -134,7 +136,7 @@ class ReactorHandler:
     def count_all_cubes(self):
         area = set()
 
-        converted_data = self.convert_data(self.data)
+        converted_data = ReactorHandler.convert_data(self.data)
 
         i = 0
         for x in converted_data:

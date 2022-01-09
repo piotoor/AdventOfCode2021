@@ -23,7 +23,8 @@ class CucumberHandler:
                     if self.board[r][c] == '>':
                         if self.board[r][(c + 1) % cc] == '.':
                             # print("{} -> {}".format((r, c), (r, (c + 1) % cc)))
-                            self.board[r][c], self.board[r][(c + 1) % cc] = self.board[r][(c + 1) % cc], self.board[r][c]
+                            self.board[r][c], self.board[r][(c + 1) % cc] = \
+                                self.board[r][(c + 1) % cc], self.board[r][c]
                             moved = True
                             c += 1
                     c += 1
@@ -39,7 +40,8 @@ class CucumberHandler:
                 while r < rr:
                     if self.board[r][c] == 'v':
                         if self.board[(r + 1) % rr][c] == '.':
-                            self.board[r][c], self.board[(r + 1) % rr][c] = self.board[(r + 1) % rr][c], self.board[r][c]
+                            self.board[r][c], self.board[(r + 1) % rr][c] =\
+                                self.board[(r + 1) % rr][c], self.board[r][c]
                             moved = True
                             r += 1
                     r += 1

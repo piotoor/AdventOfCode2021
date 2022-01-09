@@ -33,7 +33,6 @@ class AssemblyHandler:
     def extract_parameters(self):
         self.parameters.clear()
         for x in self.subprograms:
-            a, b, c = 0, 0, 0
             a = int(x[4][1].split()[1])
             b = int(x[5][1].split()[1])
             c = int(x[15][1].split()[1])

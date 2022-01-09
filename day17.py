@@ -15,7 +15,7 @@ class ProbeLauncher:
         max_v_y = 150
 
         for vx_init in range(0, t_x1 + 1):
-            for vy_init in range(-max_v_y, max_v_y):   # todo upper
+            for vy_init in range(-max_v_y, max_v_y):
                 v_x = vx_init
                 v_y = vy_init
                 pos_x = start_x

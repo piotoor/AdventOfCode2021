@@ -93,7 +93,8 @@ class AmphipodHandler:
                         moves.add((target_i, amph.target_j))
                         break
 
-        if self.data[i - 1][j] == 0 and any([self.data[i + k][j] != (j - 1) // 2 for k in range(self.room_size - i + 2)]):
+        if self.data[i - 1][j] == 0 and \
+                any([self.data[i + k][j] != (j - 1) // 2 for k in range(self.room_size - i + 2)]):
             for target_j in [1, 2, 4, 6, 8, 10, 11]:
                 cnt = 0
                 for a in range(min(j, target_j), max(j, target_j) + 1):
@@ -111,7 +112,9 @@ class AmphipodHandler:
                         cnt += 1
                 if cnt == 0:
                     for target_i in range(2, 2 + self.room_size):
-                        if self.data[target_i][target_j] == 0 and all([self.data[target_i + k][target_j] == (target_j - 1) // 2 for k in range(1, self.room_size - target_i + 2)]):
+                        if self.data[target_i][target_j] == 0 and\
+                                all([self.data[target_i + k][target_j] ==
+                                     (target_j - 1) // 2 for k in range(1, self.room_size - target_i + 2)]):
                             moves.add((target_i, target_j))
                             break
 
