@@ -24,6 +24,7 @@ import day23
 import day24
 import day25
 import argparse
+import time
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
@@ -62,5 +63,9 @@ if __name__ == '__main__':
         day25.day25,
     ]
 
+    start = time.time()
+
     for day in days_to_run:
         days_functions[day - 1]()
+
+    print("\nReport:\ndays = {}\nduration = {:.2f}s".format(days_to_run, time.time() - start))
